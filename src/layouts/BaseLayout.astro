@@ -9,12 +9,12 @@ import '../styles/global.css';
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>Astro</title>
+        <title>SLDC</title>
     </head>
     <body>
-        <div class="navbar bg-base-100 shadow-sm">
+        <div class="navbar fixed top-0 left-0 w-full z-50 bg-green-900/90 text-white">
         <div class="flex-1">
-            <a class="btn btn-ghost text-xl">daisyUI</a>
+            <a class="btn btn-ghost text-xl">SLDC</a>
         </div>
         
         <!-- Hamburger & Menu -->
@@ -25,10 +25,13 @@ import '../styles/global.css';
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </label>
-            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabindex="0"
+                class="dropdown-content menu menu-sm mt-3 p-2 shadow bg-base-100 text-base-content rounded-box w-52 z-50">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Services</a></li>
+                <li><a href="#membership">Membership</a></li>
+                <li><a href="#contact">Contact Us</a></li>
             </ul>
             </div>
         </div>
@@ -36,9 +39,11 @@ import '../styles/global.css';
         <!-- Desktop Menu -->
         <div class="hidden lg:flex flex-none">
             <ul class="menu menu-horizontal p-0">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Services</a></li>
+                <li><a href="#home">Membership</a></li>
+                <li><a href="#about">Contact Us</a></li>
             </ul>
         </div>
         </div>
