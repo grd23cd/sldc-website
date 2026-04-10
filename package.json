@@ -17,6 +17,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
-    "daisyui": "^5.5.19"
+    "daisyui": "^5.5.19",
+    "prettier-plugin-tailwindcss": "^0.7.2"
   }
 }
