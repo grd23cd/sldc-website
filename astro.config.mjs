@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://grd23cd.github.io/sldc-website',
+  site: 'https://grd23cd.github.io',
   base: '/sldc-website/',
 
   vite: {
