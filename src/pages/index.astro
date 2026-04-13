@@ -1,21 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout>
-	<div
-	class="hero min-h-svh"
-	style="background-image: url(/images/hero.jpg); background-size: cover; background-position: center;"
-	>
-    <div class="hero-overlay"></div>
-    <div class="hero-content text-neutral-content text-center">
-      <div class="max-w-md">
-		<h1 class="mb-5 text-3xl sm:text-5xl md:text-6xl font-bold">
-		San Luis Development Cooperative
-		</h1>
-		<h2 class="mb-5 text-lg font-bold text-yellow-200">Since 1967</h2>
-        <button class="btn btn-primary">Get Started</button>
-      </div>
+    <div
+    class="hero min-h-svh"
+    style={`background-image: url(${base}images/hero.jpg); background-size: cover; background-position: center;`}
+    >
+        <div class="hero-overlay"></div>
+        <div class="hero-content text-neutral-content text-center">
+            <div class="max-w-md">
+                <h1 class="mb-5 text-3xl sm:text-5xl md:text-6xl font-bold">
+                San Luis Development Cooperative
+                </h1>
+                <h2 class="mb-5 text-lg font-bold text-yellow-200">Since 1967</h2>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+        </div>
     </div>
-  </div>
 </BaseLayout>
