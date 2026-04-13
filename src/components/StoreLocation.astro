@@ -1,0 +1,24 @@
+<div class="w-full h-[400px] md:h-[500px] flex flex-col md:flex-row gap-4">
+
+  <!-- LEFT: Map WITH PIN (correct location) -->
+  <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-lg border">
+    <iframe
+      class="w-full h-full"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d483.6700565767071!2d121.55258518131635!3d14.11488729602454!2m3!1f0!2f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd55fe48058a6b%3A0x97ec725e43300f13!2sSan%20Luis%20Development%20Cooperative!5e0!3m2!1sen!2sph!4v1776071034799!5m2!1sen!2sph"
+    ></iframe>
+  </div>
+
+  <!-- RIGHT: CLEAN 360° STREET VIEW -->
+  <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-lg border">
+    <iframe
+      class="w-full h-full"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=&layer=c&cbll=14.1150785,121.5528695&cbp=11,0,0,0,0&output=svembed"
+    ></iframe>
+  </div>
+
+</div>
