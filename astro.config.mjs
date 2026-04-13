@@ -3,7 +3,6 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://grd23cd.github.io/sldc-website',
-  base: '/sldc-website/',
 
   vite: {
     plugins: [tailwindcss()]
