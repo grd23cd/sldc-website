@@ -4,87 +4,104 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href={`${base}images/logo.svg`} />
-        <link rel="icon" type="image/png" sizes="32x32" href={`${base}images/favicon-32x32.png`} />
-        <link rel="icon" type="image/png" sizes="16x16" href={`${base}images/favicon-16x16.png`} />
-        <link rel="apple-touch-icon" sizes="180x180" href={`${base}images/apple-touch-icon.png`} />
-        <link rel="icon" href={`${base}images/logo.ico`} />        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="generator" content={Astro.generator} />
-        <title>SLDC</title>
-    </head>
-    <body class="m-0 bg-white text-gray-800">
-        <div class="navbar fixed top-0 left-0 w-full z-50 bg-green-900/90 text-white pl-6">
-        <div class="flex-1 flex items-center gap-2">
-            <a href={base} class="flex items-center gap-2">
-                <img src={`${base}images/logo.png`} alt="San Luis Development Cooperative Logo" class="h-10 w-10 object-contain" />
-                <span>SLDC</span>
-            </a>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={`${base}images/logo.svg`} />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${base}images/favicon-32x32.png`} />
+    <link rel="icon" type="image/png" sizes="16x16" href={`${base}images/favicon-16x16.png`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${base}images/apple-touch-icon.png`} />
+    <link rel="icon" href={`${base}images/logo.ico`} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>SLDC</title>
+  </head>
 
-        <!-- Hamburger & Menu -->
-        <div class="flex-none lg:hidden">
-            <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </label>
-            <ul tabindex="0"
-                class="dropdown-content menu menu-sm mt-3 p-2 shadow bg-white text-gray-800 rounded-box w-52 z-50">
-                <li><a href={base}>Home</a></li>
-                <li><a href={`${base}about`}>About</a></li>
-                <li><a href={`${base}services`}>Services</a></li>
-                <li><a href={`${base}membership`}>Membership</a></li>
-                <li><a href={`${base}contact`}>Contact Us</a></li>
-            </ul>
-            </div>
-        </div>
+  <body class="m-0 bg-white text-gray-800">
 
-        <!-- Desktop Menu -->
-        <div class="hidden lg:flex flex-none">
-            <ul class="menu menu-horizontal p-0">
-                <li><a href={base} class="hover:text-yellow-400 transition">Home</a></li>
-                <li><a href={`${base}about`} class="hover:text-yellow-400 transition">About</a></li>
-                <li><a href={`${base}services`} class="hover:text-yellow-400 transition">Services</a></li>
-                <li><a href={`${base}membership`} class="hover:text-yellow-400 transition">Membership</a></li>
-                <li><a href={`${base}contact`} class="hover:text-yellow-400 transition">Contact Us</a></li>
-            </ul>
-        </div>
-        </div>
+    <!-- NAVBAR -->
+    <div class="navbar fixed top-0 left-0 w-full z-50 bg-green-900/90 text-white pl-6">
+      <div class="flex-1 flex items-center gap-2">
+        <a href={base} class="flex items-center gap-2">
+          <img src={`${base}images/logo.png`} alt="SLDC Logo" class="h-10 w-10 object-contain" />
+          <span>SLDC</span>
+        </a>
+      </div>
 
-        <main class="pt-16">
-            <slot />
-        </main>
+      <!-- MOBILE -->
+      <div class="flex-none lg:hidden">
+        <div class="dropdown dropdown-end">
+          <label tabindex="0" class="btn btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </label>
 
-        <footer class="footer sm:footer-horizontal bg-gradient-to-r from-green-800 to-green-900 text-base-content p-8 text-white">
-        <nav>
-            <h6 class="footer-title">Services</h6>
-            <a class="link link-hover">Loan & Savings</a>
-            <a class="link link-hover">Consumer Store</a>
-            <a class="link link-hover">Production & Marketing</a>
-            <a class="link link-hover">Members Benefit</a>
-        </nav>
-        <nav>
-            <h6 class="footer-title">Services</h6>
-            <a class="link link-hover">Community Services</a>
-            <a class="link link-hover">Other Services</a>
-        </nav>
-        <nav>
-            <h6 class="footer-title">Company</h6>
-            <a class="link link-hover">About us</a>
-            <a class="link link-hover">Contact</a>
-        </nav>
-        <nav>
-            <h6 class="footer-title">Social</h6>
-            <a class="inline-flex items-center justify-center p-2 rounded-md hover:bg-white/20 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
-                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-                </svg>
-            </a>
-        </nav>
-        </footer>
-    </body>
+          <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 p-2 shadow bg-white text-gray-800 rounded-box w-52 z-50">
+            <li><a href={base}>Home</a></li>
+            <li><a href={`${base}about`}>About</a></li>
+            <li><a href={`${base}services`}>Services</a></li>
+            <li><a href={`${base}membership`}>Membership</a></li>
+            <li><a href={`${base}contact`}>Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DESKTOP -->
+      <div class="hidden lg:flex flex-none">
+        <ul class="menu menu-horizontal p-0">
+          <li><a href={base}>Home</a></li>
+          <li><a href={`${base}about`}>About</a></li>
+          <li><a href={`${base}services`}>Services</a></li>
+          <li><a href={`${base}membership`}>Membership</a></li>
+          <li><a href={`${base}contact`}>Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <main class="pt-16">
+      <slot />
+    </main>
+
+    <!-- FOOTER (FIXED) -->
+    <footer class="footer sm:footer-horizontal bg-gradient-to-r from-green-800 to-green-900 text-white p-10">
+
+      <!-- Services -->
+      <nav>
+        <h6 class="footer-title">Services</h6>
+        <a href={`${base}services#loans`} class="link link-hover">Loan & Savings</a>
+        <a href={`${base}services#store`} class="link link-hover">Consumer Store</a>
+        <a href={`${base}services#production`} class="link link-hover">Production & Marketing</a>
+        <a href={`${base}services#benefits`} class="link link-hover">Members Benefit</a>
+      </nav>
+
+      <!-- More Services -->
+      <nav>
+        <h6 class="footer-title">More Services</h6>
+        <a href={`${base}services#community`} class="link link-hover">Community Services</a>
+        <a href={`${base}services#others`} class="link link-hover">Other Services</a>
+      </nav>
+
+      <!-- Company -->
+      <nav>
+        <h6 class="footer-title">Company</h6>
+        <a href={`${base}about`} class="link link-hover">About Us</a>
+        <a href={`${base}contact`} class="link link-hover">Contact</a>
+      </nav>
+
+      <!-- Social -->
+      <nav>
+        <h6 class="footer-title">Social</h6>
+
+        <a href="https://facebook.com" target="_blank"
+           class="inline-flex items-center justify-center p-2 rounded-md hover:bg-white/20 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="fill-current">
+            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+          </svg>
+        </a>
+      </nav>
+
+    </footer>
+
+  </body>
 </html>

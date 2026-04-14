@@ -3,75 +3,90 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-10">
+  <div class="max-w-6xl mx-auto px-6 py-16 space-y-16">
 
-    <div class="md:col-span-3">
-        <h1 class="mb-5 text-5xl">About San Luis Development Cooperative</h1>
-    </div>
+    <!-- HERO TITLE -->
+    <section class="text-center space-y-4">
+      <h1 class="text-5xl font-bold tracking-tight text-slate-900">
+        About San Luis Development Cooperative
+      </h1>
+      <p class="text-slate-500">
+        Lucban, Quezon
+      </p>
+    </section>
 
-    <div class="md:col-span-1">
-        <h2 class="mb-5 text-3xl">MISYON</h2>
-        <h3 class="mb-5 text-xl">San Luis Development Cooperative</h3>
-        <p class="mb-5 text-xs">Lucban Quezon</p>
-    </div>
+    <!-- MISYON -->
+    <section class="grid md:grid-cols-3 gap-8 items-start">
+      <div class="md:col-span-1">
+        <h2 class="text-3xl font-semibold text-slate-900 mb-2">MISYON</h2>
+        <p class="text-sm text-slate-500 mb-6">San Luis Development Cooperative</p>
+      </div>
 
-    <div class="md:col-span-2 text-center">
-    <div class="inline-block text-left">
-        <p>KASAPIAN - Masigasig na tumatangkililk sa mga serbisyo ng Kooperatiba.</p>
-        <p>PAMUNUAN - Naglilingkod nang may kahusayan at dedikasyon.</p>
-        <p>PANGASIWAAN - Nagmamalasakit sa pamamahala nang may kasanayan at kaalaman sa kooperatiba.</p>
-        <p>PAMAYANAN - Nakikiisa at sumusuporta sa lahat ng programang pangkaunlaran ng Kooperatiba.</p>
-    </div>
-    </div>
+      <div class="md:col-span-2 bg-white rounded-2xl shadow-md p-8 hover:shadow-lg transition">
+        <div class="space-y-3 text-slate-700 leading-relaxed">
+          <p><span class="font-semibold">KASAPIAN</span> - Masigasig na tumatangkililk sa mga serbisyo ng Kooperatiba.</p>
+          <p><span class="font-semibold">PAMUNUAN</span> - Naglilingkod nang may kahusayan at dedikasyon.</p>
+          <p><span class="font-semibold">PANGASIWAAN</span> - Nagmamalasakit sa pamamahala nang may kasanayan at kaalaman sa kooperatiba.</p>
+          <p><span class="font-semibold">PAMAYANAN</span> - Nakikiisa at sumusuporta sa lahat ng programang pangkaunlaran ng Kooperatiba.</p>
+        </div>
+      </div>
+    </section>
 
+    <!-- ADHIKAIN -->
+    <section class="grid md:grid-cols-3 gap-8 items-center bg-gradient-to-r from-green-900 to-green-700 text-white rounded-2xl p-10 shadow-lg">
+      
+      <div class="md:col-span-2 space-y-4">
+        <p class="text-lg leading-relaxed">
+          "Naninindigan sa paglilingkod para sa kabuuang pag-unlad ng mga kasapi at pamayanan"
+        </p>
+      </div>
 
-</div>
+      <div class="md:col-span-1">
+        <h2 class="text-3xl font-semibold mb-2">ADHIKAIN</h2>
+        <p class="text-sm opacity-80">San Luis Development Cooperative</p>
+        <p class="text-sm opacity-70">Lucban, Quezon</p>
+      </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-10 bg-green-900 text-white items-center">
+    </section>
 
-    <div class="md:col-span-2">
-        <p>"Naninindigan sa paglilingkod para sa kabuuang pag-unlad ng mga kasapi at pamayanan"</p>
-    </div>
+    <!-- PANANAW -->
+    <section class="grid md:grid-cols-3 gap-8 items-center">
 
-    <div class="md:col-span-1">
-        <h2 class="mb-5 text-3xl">ADHIKAIN</h2>
-        <h3 class="mb-5 text-xl">San Luis Development Cooperative</h3>
-        <p class="mb-5 text-xs">Lucban Quezon</p>
-    </div>
-</div>
+      <div class="md:col-span-2">
+        <h2 class="text-3xl font-semibold text-slate-900 mb-2">PANANAW</h2>
+        <p class="text-sm text-slate-500 mb-6">San Luis Development Cooperative</p>
+      </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-10 items-center">
+      <div class="md:col-span-1 bg-slate-50 rounded-2xl p-6 shadow-sm">
+        <p class="text-slate-700 italic">
+          "Isang nangungunang Kooperatiba sa Timog Katagalugan"
+        </p>
+      </div>
 
-    <div class="md:col-span-2">
-        <h2 class="mb-5 text-3xl">PANANAW</h2>
-        <h3 class="mb-5 text-xl">San Luis Development Cooperative</h3>
-        <p class="mb-5 text-xs">Lucban Quezon</p>
-    </div>
-    
-    <div class="md:col-span-1">
-        <p>"Isang nangungunang Kooperatiba sa Timog Katagalugan"</p>
-    </div>
-</div>
+    </section>
 
-<div class="bg-green-900 text-white flex flex-col items-center p-6">
+    <!-- HISTORY -->
+    <section class="bg-white rounded-2xl shadow-md overflow-hidden">
 
-    <div class="text-center mb-6">
-        <h2 class="text-3xl">History of San Luis Development Cooperative</h2>
-    </div>
+      <div class="bg-green-900 text-white text-center py-10">
+        <h2 class="text-3xl font-bold">
+          History of San Luis Development Cooperative
+        </h2>
+      </div>
 
-    <!-- YouTube Video -->
-    <div class="w-full max-w-3xl aspect-video">
-        <iframe
-            class="w-full h-full rounded-lg"
+      <div class="p-6 md:p-10">
+        <div class="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg">
+          <iframe
+            class="w-full aspect-video"
             src="https://www.youtube.com/embed/-GtoB0VU96E"
-            title="YouTube video"
+            title="History Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
-        </iframe>
+          </iframe>
+        </div>
+      </div>
 
-    </div>
+    </section>
 
-</div>
-
-
+  </div>
 </BaseLayout>

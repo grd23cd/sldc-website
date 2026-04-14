@@ -4,19 +4,143 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout>
-    <div
-    class="hero min-h-svh"
-    style={`background-image: url(${base}images/hero.jpg); background-size: cover; background-position: center;`}
-    >
-        <div class="hero-overlay"></div>
-        <div class="hero-content text-neutral-content text-center">
-            <div class="max-w-md">
-                <h1 class="mb-5 text-3xl sm:text-5xl md:text-6xl font-bold">
-                San Luis Development Cooperative
-                </h1>
-                <h2 class="mb-5 text-lg font-bold text-yellow-200">Since 1967</h2>
-                <button class="btn btn-primary">Get Started</button>
-            </div>
-        </div>
+
+<!-- HERO -->
+<section
+  id="home"
+  class="relative min-h-svh flex items-center justify-center text-center"
+  style={`background-image: url(${base}images/hero.jpg); background-size: cover; background-position: center;`}
+>
+  <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
+
+  <div class="relative z-10 max-w-3xl px-6 text-white space-y-6">
+
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+      San Luis Development Cooperative
+    </h1>
+
+    <p class="text-yellow-300 font-semibold">Since 1967</p>
+
+    <p class="text-white/80">
+      Empowering members through sustainable financial services and community development.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+      <a href={`${base}services`} class="bg-green-600 hover:bg-green-500 px-6 py-3 rounded-xl font-semibold">
+        Explore Services
+      </a>
+
+      <a href={`${base}about`} class="border border-white/40 px-6 py-3 rounded-xl font-semibold">
+        Learn More
+      </a>
     </div>
+
+  </div>
+</section>
+
+<!-- ABOUT PREVIEW -->
+<section id="about" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center space-y-6">
+
+    <h2 class="text-4xl font-bold">About Us</h2>
+
+    <p class="text-slate-600 max-w-3xl mx-auto leading-relaxed">
+      San Luis Development Cooperative is committed to providing financial services,
+      empowering members, and building stronger communities in Lucban and nearby areas.
+    </p>
+
+    <a href={`${base}about`} class="inline-block text-blue-600 hover:underline">
+      View Full About Page →
+    </a>
+
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section id="services" class="py-20 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6 space-y-10 text-center">
+
+    <h2 class="text-4xl font-bold">Our Services</h2>
+
+    <p class="text-slate-600 max-w-3xl mx-auto leading-relaxed">
+      Click on each service category to learn more about how we can support your financial and community needs.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6 text-left">
+
+      <a href={`${base}services#loans`} class="block bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-2">Loans</h3>
+        <p class="text-slate-600 text-sm">Accessible loan programs designed to support members’ financial needs.</p>
+      </a>
+
+      <a href={`${base}services#savings`} class="block bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-2">Savings</h3>
+        <p class="text-slate-600 text-sm">Safe and reliable savings options that help members grow funds.</p>
+      </a>
+
+      <a href={`${base}services#store`} class="block bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-2">Consumer Store</h3>
+        <p class="text-slate-600 text-sm">Affordable essential goods for members.</p>
+      </a>
+
+      <a href={`${base}services#production`} class="block bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-2">Production & Marketing</h3>
+        <p class="text-slate-600 text-sm">Support for local business growth.</p>
+      </a>
+
+      <a href={`${base}services#benefits`} class="block bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-2">Members Benefits</h3>
+        <p class="text-slate-600 text-sm">Programs that improve member welfare.</p>
+      </a>
+
+      <a href={`${base}services#community`} class="block bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-2">Community Services</h3>
+        <p class="text-slate-600 text-sm">Outreach and development programs.</p>
+      </a>
+
+      <a href={`${base}services#others`} class="block bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-2">Other Services</h3>
+        <p class="text-slate-600 text-sm">Additional support services.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- MEMBERSHIP CTA -->
+<section id="membership" class="py-20 bg-green-900 text-white text-center">
+  <div class="max-w-4xl mx-auto px-6 space-y-6">
+
+    <h2 class="text-4xl font-bold">Become a Member</h2>
+
+    <p class="text-white/80">
+      Join SLDC and enjoy financial benefits, protection programs, and cooperative growth opportunities.
+    </p>
+
+    <a href={`${base}membership`}
+       class="inline-block bg-white text-green-900 px-6 py-3 rounded-xl font-semibold">
+      Start Membership
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT PREVIEW -->
+<section id="contact" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6 text-center space-y-6">
+
+    <h2 class="text-4xl font-bold">Contact Us</h2>
+
+    <p class="text-slate-600">
+      Have questions? We're here to help.
+    </p>
+
+    <a href={`${base}contact`} class="text-blue-600 hover:underline">
+      View Contact Details →
+    </a>
+
+  </div>
+</section>
+
 </BaseLayout>

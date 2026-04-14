@@ -1,52 +1,101 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import StoreLocation from "../components/StoreLocation.astro"
+import StoreLocation from "../components/StoreLocation.astro";
 ---
 
 <BaseLayout>
-    <div class="grid grid-cols-1 gap-6 p-10">
-        <div>
-            <h1 class="mb-5 text-5xl">Contact Us</h1>
-        </div>
+  <div class="max-w-6xl mx-auto px-6 py-16 space-y-12">
 
-        <div class="grid grid-cols-1">
-            <div class="flex justify-between py-5">
-                <p>CONTACT NUMBER:</p>
-                <p>0917-125-1967</p>
-            </div>
-            <div class="flex justify-between py-5">
-                <p>CREDIT DEPARTMENT:</p>
-                <p>540-4910/0933-037-1708</p>
-            </div>
-            <div class="flex justify-between py-5">
-                <p>GROCERY STORE:</p>
-                <div>
-                    <p>MART 1: 540-4610</p>
-                    <p>MART 2: 540-6688</p>
-                    <p>MART 3: 540-5630</p>
-                </div>
-            </div>
-            <div class="flex justify-between py-5">
-                <p>RICEMILL</p>
-                <p>540-4201/0970-781-9657</p>
-            </div>
-            <div class="flex justify-between py-5">
-                <p>WATER FILLING STATION</p>
-                <p>09564115441/09297051314</p>
-            </div>
-            <div class="flex justify-between py-5">
-                <p>EMAIL ADDRESS</p>
-                <p>sanluisdevelopmentcooperative@yahoo.com</p>
-            </div>
-            <div class="flex justify-between py-5">
-                <p>GCASH NUMBER</p>
-                <p>0916-376-5844 A** M**** B.</p>
-            </div>
-            <div class="flex justify-between py-5">
-                <p>OR YOU CAN VISIT US AT</p>
-                <p>General Lucban corner Emilio Jacinto St. Lucban, Quezon</p>
-            </div>
+    <!-- HEADER -->
+    <section class="text-center space-y-4">
+      <h1 class="text-5xl font-bold tracking-tight text-slate-900">
+        Contact Us
+      </h1>
+      <p class="text-slate-500">
+        Get in touch with San Luis Development Cooperative
+      </p>
+    </section>
+
+    <!-- CONTACT CARDS -->
+    <section class="grid md:grid-cols-2 gap-6">
+
+      <!-- MAIN CONTACT -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+        <h2 class="text-lg font-semibold text-slate-900">Contact Number</h2>
+        <a href="tel:09171251967" class="text-blue-600 hover:underline">
+          0917-125-1967
+        </a>
+      </div>
+
+      <!-- CREDIT DEPT -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+        <h2 class="text-lg font-semibold text-slate-900">Credit Department</h2>
+        <p class="text-slate-700">
+          540-4910 / 0933-037-1708
+        </p>
+      </div>
+
+      <!-- GROCERY STORE -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+        <h2 class="text-lg font-semibold text-slate-900">Grocery Store (Marts)</h2>
+
+        <div class="grid sm:grid-cols-3 gap-3 text-slate-700">
+          <p>Mart 1: 540-4610</p>
+          <p>Mart 2: 540-6688</p>
+          <p>Mart 3: 540-5630</p>
         </div>
-    </div>
-    <StoreLocation />
+      </div>
+
+      <!-- RICE MILL -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+        <h2 class="text-lg font-semibold text-slate-900">Ricemill</h2>
+        <p class="text-slate-700">540-4201 / 0970-781-9657</p>
+      </div>
+
+      <!-- WATER STATION -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+        <h2 class="text-lg font-semibold text-slate-900">Water Filling Station</h2>
+        <p class="text-slate-700">0956-411-5441 / 0929-705-1314</p>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+        <h2 class="text-lg font-semibold text-slate-900">Email Address</h2>
+        <a href="mailto:sanluisdevelopmentcooperative@yahoo.com"
+           class="text-blue-600 hover:underline break-all">
+          sanluisdevelopmentcooperative@yahoo.com
+        </a>
+      </div>
+
+      <!-- GCASH -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+        <h2 class="text-lg font-semibold text-slate-900">GCash</h2>
+        <p class="text-slate-700">
+          0916-376-5844 (A** M**** B.)
+        </p>
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+        <h2 class="text-lg font-semibold text-slate-900">Visit Us</h2>
+        <p class="text-slate-700">
+          General Lucban corner Emilio Jacinto St. Lucban, Quezon
+        </p>
+      </div>
+
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="bg-green-900 text-white rounded-2xl shadow-lg overflow-hidden">
+      <div class="p-6 text-center">
+        <h2 class="text-3xl font-bold">Our Location</h2>
+        <p class="text-white/80 mt-2">Find us on the map below</p>
+      </div>
+
+      <div class="p-4 md:p-6">
+        <StoreLocation />
+      </div>
+    </section>
+
+  </div>
 </BaseLayout>

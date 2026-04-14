@@ -1,165 +1,132 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Accordion from "../components/Accordion.astro";
+
 const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout>
-    <div class="p-10 text-center">
-        <h1 class="mb-5 text-5xl">Our Cooperative Services</h1>
-        <p class="mb-5 text-lg">Tuklasin at alamin ang iba't ibang produkto at serbisyo natin</p>
-        <p class="mb-5 text-lg">Halina't ating tangkilikin!</p>
 
-        <div class="collapse collapse-arrow text-left">
-            <input type="checkbox" name="my-accordion" />
-            <div class="collapse-title font-semibold">Loans</div>
-            <div class="collapse-content text-sm text-center">
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
 
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Regular Loan</h3>
-                    <p>• 3x ng fixed Deposit</p>
-                    <p>• Maaring Bayaran ng Hulugan</p>
-                    <p>• Mula 1-36 Buwan</p>
-                </div>
+  /* ✅ FIX NAVBAR OVERLAP (IMPORTANT) */
+  [id] {
+    scroll-margin-top: 120px;
+  }
+</style>
 
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Special Loan</h3>
-                    <p class="mb-3">Petty Cash</p>
-                    <p class="text-xs mb-3">• Pinakamalaking mahihiram ay hanggang P5,000.00 na maaring bayaran sa loob ng 1 Buwan</p>
-                    <p>Emergency</p>
-                    <p>Home Furnishing Program</p>
-                </div>
+<div class="max-w-6xl mx-auto px-6 py-16 space-y-14">
 
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Secured Loan</h3>
-                    <p>• Ibabatay sa Collateral na hindi hihigit sa P2,000,000.00 at ito'y maaring bayaran sa loob ng 5 Taon.</p>
-                </div>
+  <!-- HEADER -->
+  <section class="text-center space-y-4">
+    <h1 class="text-5xl font-bold tracking-tight text-slate-900">
+      Our Cooperative Services
+    </h1>
+    <p class="text-lg text-slate-600">
+      Tuklasin at alamin ang iba't ibang produkto at serbisyo natin
+    </p>
+    <p class="text-slate-500">
+      Halina't ating tangkilikin!
+    </p>
+  </section>
 
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Car Loan</h3>
-                    <p>• Pinakamalaking mahihiram ay halagang P2,000,000.00 na sasakyan, Babayaran sa loob ng 3 hanggang 5 Taon. Kasaping may palagiang lagak na hindi bababa sa P50,000.00.</p>
-                </div>
+  <!-- ACCORDIONS -->
+  <div class="space-y-6">
 
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Share Capital</h3>
-                    <p class="mb-3">Permanenteng impok ng Kamay ari.</p>
-                    <p>• Ang pinakamababang sapi ay P4,000.00</p>
-                    <p>• Ito ay kumikita ng tubo o DIBIDENDO</p>
-                    <p>• Dito ibinabatay ang maaaring utangin ng kasapi.</p>
-                </div>
-
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Credit Card</h3>
-                    <p>• Ito ay lagak na permanenteng impok para sa SLDC Mart</p>
-                    <p>• Mula P250.00 Hanggang P2000.00 na lagak</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="collapse collapse-arrow text-left">
-            <input type="checkbox" name="my-accordion" />
-            <div class="collapse-title font-semibold">Savings</div>
-            <div class="collapse-content text-sm text-center">
-                
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Savings Deposit</h3>
-                    <p>• Pansamantalang impok ng Kamay ari.</p>
-                    <p>• Maaaring kunin kung kailangan.</p>
-                    <p>• P500.00 ang pinaka mababang hulog</p>
-                    <p>• Ang palagiang lagak ay P100.00</p>
-                </div>
-
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Time Deposit</h3>
-                    <p>• Ito ay salaping naka deposito na maaaring makuha sa takdang panahon.</p>
-                    <p>• Ang pinakamababang lagak ay P10,000.00.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="collapse collapse-arrow text-left">
-            <input type="checkbox" name="my-accordion" />
-            <div class="collapse-title font-semibold">Consumer Store</div>
-            <div class="collapse-content text-sm text-center">
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl"><a href={`${base}mart1`}>SLDC Mart - I Lucban</a></h3>
-                    <h3 class="mb-5 text-xl"><a href={`${base}mart2`}>SLDC Mart - II Lucban</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Mart3">SLDC Mart - III Lucban</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Mart4">SLDC Mart - IV Luisiana</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#WaterRefilling">Water Refilling</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Appliances">Appliances and Gift Shop</a></h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="collapse collapse-arrow text-left">
-            <input type="checkbox" name="my-accordion" />
-            <div class="collapse-title font-semibold">Production and Marketing</div>
-            <div class="collapse-content text-sm text-center">
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Palay</h3>
-                    <h3 class="mb-5 text-xl">Rice</h3>
-                    <h3 class="mb-5 text-xl">Rice bran and other by-products</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="collapse collapse-arrow text-left">
-            <input type="checkbox" name="my-accordion" />
-            <div class="collapse-title font-semibold">Members Benefit</div>
-            <div class="collapse-content text-sm text-center">
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Abuluyan</h3>
-                    <p>• Pagbibigay ng halaga sa kanyang tagapamana bilang tulong sa pamilya ng namayapang kasapi.</p>
-                </div>
-
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Damayan sa Utang (DSU)</h3>
-                    <p>• Isang programa na ang Loan ng kasapi ay naka Insured upang walang bayarang utang ang mga naiwan ng namayapa.</p>
-                </div>
-
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Care MBA</h3>
-                    <p>• Isang insurance kung saan kasamang naka-insured ang asawa at dalawang anak na 21 yrs. Old pababa bilang tulong sa kasapi kung sakaling maaksidente o bawian ng buhay.</p>
-                </div>
-
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Death Assistance</h3>
-                    <p>• Pagbibigay tulong sa mga kasaping hindi kasali sa Abuluyan.</p>
-                </div>
-
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl">Christmas Gift</h3>
-                    <p>• Makatanggap ng papasko mula sa San Luis Development Cooperative.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="collapse collapse-arrow text-left">
-            <input type="checkbox" name="my-accordion" />
-            <div class="collapse-title font-semibold">Community Services</div>
-            <div class="collapse-content text-sm text-center">
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl"><a href="#Service1">Dumagat Community Service</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Service2">PRE-MEMBERSHIP SEMINAR LUISIANA</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Service3">TAGCODEC Ownership Seminar</a></h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="collapse collapse-arrow text-left">
-            <input type="checkbox" name="my-accordion" />
-            <div class="collapse-title font-semibold">Other Services</div>
-            <div class="collapse-content text-sm text-center">
-                <div class="my-10">
-                    <h3 class="mb-5 text-xl"><a href="#Service1">Palay Warehousing</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Service2">Rice Milling</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Service3">Drying</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Service4">Function Hall/Chair Rental</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Service5">Van for Hire</a></h3>
-                    <h3 class="mb-5 text-xl"><a href="#Service6">ATM</a></h3>
-                </div>
-            </div>
-        </div>
-        
+    <!-- LOANS -->
+    <div id="loans" class="scroll-mt-32 bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden">
+      <Accordion title="Loans">
+        <p><b>Regular Loan</b> - 3x deposit, 1–36 months</p>
+        <p><b>Special Loan</b> - Emergency, petty cash</p>
+        <p><b>Secured Loan</b> - up to ₱2,000,000</p>
+        <p><b>Car Loan</b> - 3–5 years term</p>
+      </Accordion>
     </div>
+
+    <!-- SAVINGS -->
+    <div id="savings" class="scroll-mt-32 bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden">
+      <Accordion title="Savings">
+        <p>• Savings Deposit (₱500 minimum)</p>
+        <p>• Withdraw anytime</p>
+        <p>• Time Deposit (₱10,000 minimum)</p>
+      </Accordion>
+    </div>
+
+    <!-- CONSUMER STORE -->
+    <div id="store" class="scroll-mt-32 bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden">
+      <Accordion title="Consumer Store">
+        <a class="block text-blue-600 hover:underline" href={`${base}mart1`}>SLDC Mart - I Lucban</a>
+        <a class="block text-blue-600 hover:underline" href={`${base}mart2`}>SLDC Mart - II Lucban</a>
+        <a class="block text-blue-600 hover:underline" href={`${base}mart3`}>SLDC Mart - III Lucban</a>
+      </Accordion>
+    </div>
+
+    <!-- PRODUCTION -->
+    <div id="production" class="scroll-mt-32 bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden">
+      <Accordion title="Production & Marketing">
+        <p>Palay support for farmers</p>
+        <p>Rice distribution program</p>
+        <p>By-products utilization</p>
+      </Accordion>
+    </div>
+
+    <!-- MEMBERS BENEFITS -->
+    <div id="benefits" class="scroll-mt-32 bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden">
+      <Accordion title="Members Benefits">
+        <p>• Abuluyan assistance</p>
+        <p>• Loan protection</p>
+        <p>• Insurance programs</p>
+      </Accordion>
+    </div>
+
+    <!-- COMMUNITY SERVICES -->
+    <div id="community" class="scroll-mt-32 bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden">
+      <Accordion title="Community Services">
+        <p>Dumagat outreach</p>
+        <p>Pre-Membership Seminar</p>
+        <p>TAGCODEC Seminar</p>
+      </Accordion>
+    </div>
+
+    <!-- OTHER SERVICES -->
+    <div id="others" class="scroll-mt-32 bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden">
+      <Accordion title="Other Services">
+        <p>Rice Milling</p>
+        <p>Drying Services</p>
+        <p>Van for Hire</p>
+        <p>ATM Services</p>
+      </Accordion>
+    </div>
+
+  </div>
+</div>
+
+<script is:inline>
+  function openAccordionFromHash() {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    const accordion = target.querySelector("[data-accordion]");
+    if (accordion) {
+      accordion.open = true;
+    }
+
+    setTimeout(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+  }
+
+  // Run on page load (handles cross-page navigation)
+  document.addEventListener("DOMContentLoaded", openAccordionFromHash);
+
+  // Run on hash change (handles same-page anchor clicks)
+  window.addEventListener("hashchange", openAccordionFromHash);
+</script>
+
 </BaseLayout>
