@@ -13,15 +13,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </section>
 
     <!-- WHAT IS COOPERATIVE -->
-    <section class="grid md:grid-cols-3 gap-8 items-center">
-      
-      <div>
-        <h2 class="text-3xl font-semibold text-slate-900">
+    <section class="relative grid md:grid-cols-3 gap-8 items-center py-16 overflow-hidden">
+
+      <!-- TITLE -->
+      <div class="relative" style="z-index: 1;">
+        <div class="absolute inset-0"
+          style="clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%); background: linear-gradient(to right, #14532d, #15803d); z-index: -1;">
+        </div>
+        <h2 class="text-3xl font-semibold text-white px-3 py-2">
           Ano ang Kooperatiba?
         </h2>
       </div>
 
-      <div class="md:col-span-2 bg-white rounded-2xl shadow-md p-8 text-slate-700 leading-relaxed">
+      <!-- CARD -->
+      <div class="relative md:col-span-2 bg-white rounded-2xl shadow-md p-8 text-slate-700 leading-relaxed" style="z-index: 1;">
         <p>
           "Ang Kooperatiba ay nakakapagsarili at nakarehistrong asosasyon ng mga tao na mayroong pare-parehong interes na may kusang loob na nag sama-sama para makamit ang kanilang sosyal, pangkabuhayan at kulturang pangangailangan at hangarin sa pamamagitan ng paglalagak ng kaukulang capital, tumatangkilik sa mga produkto at serbisyo at tumatanggap ng patas na bahagi sa mga pananagutan at benepisyo na naaayon sa pandaigdigang prinsipyo ng kooperatiba."
         </p>
