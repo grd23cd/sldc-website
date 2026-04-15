@@ -1,10 +1,12 @@
 ---
 import type { ImageMetadata } from 'astro';
-import img1 from '../assets/carousel/sldc-5.jpg';
-import img2 from '../assets/carousel/sldc-6.jpg';
-import img3 from '../assets/carousel/sldc-7.jpg';
+import img1 from '../assets/carousel/mart2-1.jpg';
+import img2 from '../assets/carousel/mart2-2.jpg';
+import img3 from '../assets/carousel/mart2-3.jpg';
+import img4 from '../assets/carousel/mart2-4.jpg';
+import img5 from '../assets/carousel/mart2-5.jpg';
 
-const images: ImageMetadata[] = [img1, img2, img3];
+const images: ImageMetadata[] = [img1, img2, img3, img4, img5];
 ---
 
 <div class="flex justify-center mt-10">
@@ -34,7 +36,7 @@ const images: ImageMetadata[] = [img1, img2, img3];
 
 <script is:inline>
   const track = document.getElementById("track");
-  const totalSlides = 3;
+  const totalSlides = 5;
   let index = 0;
 
   function updateSlide() {

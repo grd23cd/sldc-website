@@ -16,11 +16,11 @@
          w-full sm:w-80 h-[85vh] sm:h-[420px]
          bg-white shadow-2xl border 
          flex flex-col z-50
-         rounded-t-xl sm:rounded-xl">
+         rounded-t-xl sm:rounded-xl overflow-hidden">
 
   <!-- HEADER -->
   <div class="bg-green-700 text-white px-4 py-3 
-              flex justify-between items-center rounded-t-xl">
+              flex justify-between items-center">
     <span class="font-semibold">Chat Support</span>
     <button id="closeChat">✕</button>
   </div>
@@ -44,6 +44,22 @@
 
 </div>
 
+<style>
+  /* 🌟 Smooth fade + slide animation */
+  .msg {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeInUp 0.25s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
 <script is:inline>
   const QA = {
     "what are your hours": "We are open 8AM–5PM Monday to Friday.",
@@ -56,22 +72,35 @@
   const chatToggle = document.getElementById("chatToggle");
   const closeChat = document.getElementById("closeChat");
 
+  let welcomeShown = false;
+
   function clearChat() {
     chatBox.innerHTML = "";
+    welcomeShown = false;
   }
 
   function addMessage(text, type) {
     const div = document.createElement("div");
 
     div.className =
-      type === "user"
-        ? "text-right text-green-700"
-        : "text-left text-gray-700";
+      (type === "user"
+        ? "text-right text-green-700 msg"
+        : "text-left text-gray-700 msg");
 
     div.textContent = text;
 
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function showWelcome() {
+    if (welcomeShown) return;
+
+    welcomeShown = true;
+
+    setTimeout(() => {
+      addMessage("Hi 👋 How can I help you today?", "bot");
+    }, 300);
   }
 
   function getAnswer(msg) {
@@ -91,18 +120,19 @@
     addMessage(getAnswer(msg), "bot");
   }
 
-  // OPEN CHAT (RESET ON OPEN)
+  // OPEN CHAT
   chatToggle.addEventListener("click", () => {
     const isHidden = chatWidget.classList.contains("hidden");
 
     chatWidget.classList.toggle("hidden");
 
     if (isHidden) {
-      clearChat(); // fresh chat every open
+      clearChat();
+      showWelcome();
     }
   });
 
-  // CLOSE CHAT (ALSO RESET)
+  // CLOSE CHAT
   closeChat.addEventListener("click", () => {
     chatWidget.classList.add("hidden");
     clearChat();
