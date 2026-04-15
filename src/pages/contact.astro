@@ -4,7 +4,7 @@ import StoreLocation from "../components/StoreLocation.astro";
 ---
 
 <BaseLayout>
-  <div class="max-w-6xl mx-auto px-6 py-16 space-y-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 space-y-12 overflow-x-hidden">
 
     <!-- HEADER -->
     <section class="text-center space-y-4">
@@ -17,30 +17,29 @@ import StoreLocation from "../components/StoreLocation.astro";
     </section>
 
     <!-- CONTACT CARDS -->
-    <section class="grid md:grid-cols-2 gap-6">
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
       <!-- MAIN CONTACT -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 min-w-0 break-words">
         <h2 class="text-lg font-semibold text-slate-900">Contact Number</h2>
-        <p class="text-slate-700">
+        <p class="text-slate-700 break-words">
           0917-125-1967
         </p>
-        </a>
       </div>
 
       <!-- CREDIT DEPT -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 min-w-0 break-words">
         <h2 class="text-lg font-semibold text-slate-900">Credit Department</h2>
-        <p class="text-slate-700">
+        <p class="text-slate-700 break-words">
           540-4910 / 0933-037-1708
         </p>
       </div>
 
       <!-- GROCERY STORE -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2 min-w-0 break-words">
         <h2 class="text-lg font-semibold text-slate-900">Grocery Store (Marts)</h2>
 
-        <div class="grid sm:grid-cols-3 gap-3 text-slate-700">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-slate-700 break-words">
           <p>Mart 1: 540-4610</p>
           <p>Mart 2: 540-6688</p>
           <p>Mart 3: 540-5630</p>
@@ -48,37 +47,41 @@ import StoreLocation from "../components/StoreLocation.astro";
       </div>
 
       <!-- RICE MILL -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 min-w-0 break-words">
         <h2 class="text-lg font-semibold text-slate-900">Ricemill</h2>
-        <p class="text-slate-700">540-4201 / 0970-781-9657</p>
+        <p class="text-slate-700 break-words">
+          540-4201 / 0970-781-9657
+        </p>
       </div>
 
       <!-- WATER STATION -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 min-w-0 break-words">
         <h2 class="text-lg font-semibold text-slate-900">Water Filling Station</h2>
-        <p class="text-slate-700">0956-411-5441 / 0929-705-1314</p>
+        <p class="text-slate-700 break-words">
+          0956-411-5441 / 0929-705-1314
+        </p>
       </div>
 
       <!-- EMAIL -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2 min-w-0">
         <h2 class="text-lg font-semibold text-slate-900">Email Address</h2>
-        <p class="text-slate-700">
+        <p class="text-slate-700 break-all">
           sanluisdevelopmentcooperative@yahoo.com
         </p>
       </div>
 
       <!-- GCASH -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2 min-w-0 break-words">
         <h2 class="text-lg font-semibold text-slate-900">GCash</h2>
-        <p class="text-slate-700">
+        <p class="text-slate-700 break-words">
           0916-376-5844 (A** M**** B.)
         </p>
       </div>
 
       <!-- ADDRESS -->
-      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2">
+      <div class="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 space-y-3 md:col-span-2 min-w-0 break-words">
         <h2 class="text-lg font-semibold text-slate-900">Visit Us</h2>
-        <p class="text-slate-700">
+        <p class="text-slate-700 break-words">
           General Lucban corner Emilio Jacinto St. Lucban, Quezon
         </p>
       </div>
