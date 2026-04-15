@@ -1,11 +1,11 @@
 ---
 ---
 
-<!-- FLOATING BUTTON + TEXT -->
+<!-- FLOATING BUTTON -->
 <div class="fixed bottom-6 right-6 flex flex-col items-end z-50">
 
   <button id="chatToggle"
-    class="bg-green-700 hover:bg-green-800 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl">
+    class="bg-green-700 hover:bg-green-800 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg">
     💬
   </button>
 
@@ -13,10 +13,15 @@
 
 <!-- CHAT WINDOW -->
 <div id="chatWidget"
-  class="hidden fixed bottom-24 right-6 w-80 bg-white shadow-2xl rounded-xl border flex flex-col h-[420px] z-50">
+  class="hidden fixed bottom-0 right-0 sm:bottom-24 sm:right-6 
+         w-full sm:w-80 h-[85vh] sm:h-[420px]
+         bg-white shadow-2xl border 
+         flex flex-col z-50
+         rounded-t-xl sm:rounded-xl">
 
   <!-- HEADER -->
-  <div class="bg-green-700 text-white px-4 py-3 rounded-t-xl flex justify-between items-center">
+  <div class="bg-green-700 text-white px-4 py-3 
+              flex justify-between items-center rounded-t-xl">
     <span class="font-semibold">Chat Support</span>
     <button id="closeChat">✕</button>
   </div>
@@ -35,7 +40,10 @@
   </div>
 
   <!-- CHAT AREA -->
-  <div id="chatBox" class="flex-1 overflow-y-auto space-y-2 text-sm p-2"></div>
+  <div id="chatBox"
+    class="flex-1 overflow-y-auto space-y-2 text-sm p-2">
+  </div>
+
 </div>
 
 <script is:inline>
@@ -81,7 +89,7 @@
     addMessage(getAnswer(msg), "bot");
   }
 
-  // FIXED: Toggle works again
+  // Toggle open/close
   chatToggle.addEventListener("click", () => {
     chatWidget.classList.toggle("hidden");
   });
