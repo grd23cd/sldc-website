@@ -1,0 +1,74 @@
+---
+import type { ImageMetadata } from 'astro';
+import img1 from '../assets/carousel/appliances-1.jpg';
+import img2 from '../assets/carousel/appliances-2.jpg';
+import img3 from '../assets/carousel/appliances-3.jpg';
+import img4 from '../assets/carousel/appliances-4.jpg';
+import img5 from '../assets/carousel/appliances-5.jpg';
+
+const images: ImageMetadata[] = [img1, img2, img3, img4, img5];
+---
+
+<div class="flex justify-center mt-10">
+  <div class="relative w-[800px] h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-xl shadow-lg">
+
+    <!-- SLIDER TRACK -->
+    <div id="track" class="flex w-full h-full transition-transform duration-700 ease-in-out">
+    {/* @ts-ignore */}
+      {images.map((img) => (
+        <img src={img.src} class="w-full h-full flex-shrink-0 object-cover" />
+      ))}
+    </div>
+
+    <!-- NAV BUTTONS -->
+    <button id="prev"
+      class="absolute left-4 top-1/2 -translate-y-1/2 btn btn-circle">
+      ❮
+    </button>
+
+    <button id="next"
+      class="absolute right-4 top-1/2 -translate-y-1/2 btn btn-circle">
+      ❯
+    </button>
+
+  </div>
+</div>
+
+<script is:inline>
+  const track = document.getElementById("track");
+  const totalSlides = 5;
+  let index = 0;
+
+  function updateSlide() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  // Auto slide
+  let interval = setInterval(() => {
+    index = (index + 1) % totalSlides;
+    updateSlide();
+  }, 3000);
+
+  // Next / Prev buttons
+  document.getElementById("next").addEventListener("click", () => {
+    index = (index + 1) % totalSlides;
+    updateSlide();
+
+    resetAuto();
+  });
+
+  document.getElementById("prev").addEventListener("click", () => {
+    index = (index - 1 + totalSlides) % totalSlides;
+    updateSlide();
+
+    resetAuto();
+  });
+
+  function resetAuto() {
+    clearInterval(interval);
+    interval = setInterval(() => {
+      index = (index + 1) % totalSlides;
+      updateSlide();
+    }, 3000);
+  }
+</script>
