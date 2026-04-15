@@ -1,14 +1,13 @@
 ---
+
 ---
 
 <!-- FLOATING BUTTON -->
 <div class="fixed bottom-6 right-6 flex flex-col items-end z-50">
-
   <button id="chatToggle"
     class="bg-green-700 hover:bg-green-800 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg">
     💬
   </button>
-
 </div>
 
 <!-- CHAT WINDOW -->
@@ -41,8 +40,7 @@
 
   <!-- CHAT AREA -->
   <div id="chatBox"
-    class="flex-1 overflow-y-auto space-y-2 text-sm p-2">
-  </div>
+    class="flex-1 overflow-y-auto space-y-2 text-sm p-2"></div>
 
 </div>
 
@@ -57,6 +55,10 @@
   const chatWidget = document.getElementById("chatWidget");
   const chatToggle = document.getElementById("chatToggle");
   const closeChat = document.getElementById("closeChat");
+
+  function clearChat() {
+    chatBox.innerHTML = "";
+  }
 
   function addMessage(text, type) {
     const div = document.createElement("div");
@@ -89,16 +91,24 @@
     addMessage(getAnswer(msg), "bot");
   }
 
-  // Toggle open/close
+  // OPEN CHAT (RESET ON OPEN)
   chatToggle.addEventListener("click", () => {
+    const isHidden = chatWidget.classList.contains("hidden");
+
     chatWidget.classList.toggle("hidden");
+
+    if (isHidden) {
+      clearChat(); // fresh chat every open
+    }
   });
 
+  // CLOSE CHAT (ALSO RESET)
   closeChat.addEventListener("click", () => {
     chatWidget.classList.add("hidden");
+    clearChat();
   });
 
-  // Quick buttons
+  // QUICK BUTTONS
   document.querySelectorAll(".quick-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       sendMessage(btn.textContent);
