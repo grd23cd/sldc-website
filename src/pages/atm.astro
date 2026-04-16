@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import atm from "../assets/carousel/atm.jpg";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+  <div class="p-10 text-center space-y-6">
+    <h1 class="text-5xl">ATM Services</h1>
+
+    <div class="w-[800px] h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-xl shadow-lg mx-auto mt-10">
+      <Image
+        src={atm}
+        alt="ATM"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <a href={`${base}services#others`} 
+      class="m-10 inline-block bg-gradient-to-r from-green-900 to-green-700 hover:from-green-800 hover:to-green-600 text-white font-semibold px-8 py-3 rounded-xl shadow-md transition duration-300">
+      Back To Services
+    </a>
+  </div>
+</BaseLayout>
