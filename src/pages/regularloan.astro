@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+  <div class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+
+    <!-- HERO -->
+    <section class="text-center space-y-3">
+      <h1 class="text-5xl font-bold tracking-tight text-slate-900">
+        Regular Loan Calculator
+      </h1>
+      <p class="text-xl pt-10">
+        Note: This is for first timers and those with no existing loans. For more accurate details, please consult our credit department.
+      </p>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="grid md:grid-cols-3 gap-8">
+
+      <!-- INPUT -->
+      <div class="bg-white rounded-2xl shadow-md p-6 space-y-6">
+
+        <h2 class="text-xl font-semibold text-slate-800">Loan Parameters</h2>
+
+        <div>
+          <label class="text-sm text-slate-600">Amount (₱)</label>
+          <input id="amount" type="number" class="w-full mt-1 p-2 border rounded-lg" value="50000">
+        </div>
+
+        <!-- BUTTONS -->
+        <div>
+          <label class="text-sm text-slate-600">Payment Type</label>
+          <div class="flex gap-2 mt-2">
+            <button id="monthlyBtn" class="typeBtn bg-green-700 text-white px-3 py-1 rounded-lg">Monthly</button>
+            <button id="quarterlyBtn" class="typeBtn bg-slate-200 px-3 py-1 rounded-lg">Quarterly</button>
+            <button id="lumpBtn" class="typeBtn bg-slate-200 px-3 py-1 rounded-lg">Lump Sum</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm text-slate-600">Term (months)</label>
+          <input id="term" type="number" max="36" placeholder="1 - 36"
+            class="w-full mt-1 p-2 border rounded-lg">
+        </div>
+
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="md:col-span-2 space-y-6">
+
+        <div class="bg-gradient-to-r from-green-900 to-green-700 text-white rounded-2xl p-10 text-center shadow-lg">
+          <p class="text-sm opacity-80">Net Proceeds</p>
+          <p class="text-4xl font-bold mt-2" id="net">₱0.00</p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <script is:inline>
+
+    const loanTable = [
+      { term: 1, monthly: 1.4, quarterly: 1.7, lumpsum: 2, dsu: 0.1, sFee: 3.5 },
+      { term: 2, monthly: 2.1, quarterly: 3.4, lumpsum: 4, dsu: 0.2, sFee: 3.5 },
+      { term: 3, monthly: 2.8, quarterly: 5.1, lumpsum: 6, dsu: 0.3, sFee: 3.5 },
+      { term: 4, monthly: 3.5, quarterly: 5.95, lumpsum: 8, dsu: 0.4, sFee: 3.5 },
+      { term: 5, monthly: 4.2, quarterly: 6.8, lumpsum: 10, dsu: 0.5, sFee: 3.5 },
+      { term: 6, monthly: 4.9, quarterly: 7.65, lumpsum: 12, dsu: 0.6, sFee: 3.5 },
+      { term: 7, monthly: 5.6, quarterly: 8.5, lumpsum: 13, dsu: 0.7, sFee: 4 },
+      { term: 8, monthly: 6.3, quarterly: 9.35, lumpsum: 14, dsu: 0.8, sFee: 4 },
+      { term: 9, monthly: 7, quarterly: 10.2, lumpsum: 15, dsu: 0.9, sFee: 4 },
+      { term: 10, monthly: 7.7, quarterly: 11.05, lumpsum: 16, dsu: 1.0, sFee: 4 },
+      { term: 11, monthly: 8.4, quarterly: 11.9, lumpsum: 17, dsu: 1.1, sFee: 4 },
+      { term: 12, monthly: 9.1, quarterly: 12.75, lumpsum: 18, dsu: 1.2, sFee: 4 },
+
+      { term: 13, monthly: 9.8, quarterly: 13.6, lumpsum: 19, dsu: 1.3, sFee: 4.5 },
+      { term: 14, monthly: 10.5, quarterly: 14.45, lumpsum: 20, dsu: 1.4, sFee: 4.5 },
+      { term: 15, monthly: 11.2, quarterly: 15.3, lumpsum: 21, dsu: 1.5, sFee: 4.5 },
+      { term: 16, monthly: 11.9, quarterly: 16.15, lumpsum: 22, dsu: 1.6, sFee: 4.5 },
+      { term: 17, monthly: 12.6, quarterly: 17, lumpsum: 23, dsu: 1.7, sFee: 4.5 },
+      { term: 18, monthly: 13.3, quarterly: 17.85, lumpsum: 24, dsu: 1.8, sFee: 4.5 },
+
+      { term: 19, monthly: 14, quarterly: 18.7, lumpsum: 25, dsu: 1.9, sFee: 4.5 },
+      { term: 20, monthly: 14.7, quarterly: 19.55, lumpsum: 26, dsu: 2.0, sFee: 4.5 },
+      { term: 21, monthly: 15.4, quarterly: 20.4, lumpsum: 27, dsu: 2.1, sFee: 4.5 },
+      { term: 22, monthly: 16.1, quarterly: 21.25, lumpsum: 28, dsu: 2.2, sFee: 4.5 },
+      { term: 23, monthly: 16.8, quarterly: 22.1, lumpsum: 29, dsu: 2.3, sFee: 4.5 },
+      { term: 24, monthly: 17.5, quarterly: 22.95, lumpsum: 30, dsu: 2.4, sFee: 4.5 },
+
+      { term: 25, monthly: 18.2, quarterly: 23.8, lumpsum: 31, dsu: 2.5, sFee: 5 },
+      { term: 26, monthly: 18.9, quarterly: 24.65, lumpsum: 32, dsu: 2.6, sFee: 5 },
+      { term: 27, monthly: 19.6, quarterly: 25.5, lumpsum: 33, dsu: 2.7, sFee: 5 },
+      { term: 28, monthly: 20.3, quarterly: 26.35, lumpsum: 34, dsu: 2.8, sFee: 5 },
+      { term: 29, monthly: 21, quarterly: 27.2, lumpsum: 35, dsu: 2.9, sFee: 5 },
+      { term: 30, monthly: 21.7, quarterly: 28.05, lumpsum: 36, dsu: 3.0, sFee: 5 },
+      { term: 31, monthly: 22.4, quarterly: 28.9, lumpsum: 37, dsu: 3.1, sFee: 5 },
+      { term: 32, monthly: 23.1, quarterly: 29.75, lumpsum: 38, dsu: 3.2, sFee: 5 },
+      { term: 33, monthly: 23.8, quarterly: 30.6, lumpsum: 39, dsu: 3.3, sFee: 5 },
+      { term: 34, monthly: 24.5, quarterly: 31.45, lumpsum: 40, dsu: 3.4, sFee: 5 },
+      { term: 35, monthly: 25.2, quarterly: 32.3, lumpsum: 41, dsu: 3.5, sFee: 5 },
+      { term: 36, monthly: 25.9, quarterly: 33.15, lumpsum: 42, dsu: 3.6, sFee: 5 }
+    ];
+
+    const amountEl = document.getElementById("amount");
+    const termEl = document.getElementById("term");
+    const netEl = document.getElementById("net");
+
+    let paymentType = "monthly";
+
+    function setActive(btn) {
+      document.querySelectorAll(".typeBtn").forEach(b => {
+        b.classList.remove("bg-green-700","text-white");
+        b.classList.add("bg-slate-200");
+      });
+      btn.classList.add("bg-green-700","text-white");
+      btn.classList.remove("bg-slate-200");
+    }
+
+    document.getElementById("monthlyBtn").onclick = (e) => {
+      paymentType = "monthly";
+      setActive(e.target);
+      calculate();
+    };
+
+    document.getElementById("quarterlyBtn").onclick = (e) => {
+      paymentType = "quarterly";
+      setActive(e.target);
+      calculate();
+    };
+
+    document.getElementById("lumpBtn").onclick = (e) => {
+      paymentType = "lumpsum";
+      setActive(e.target);
+      calculate();
+    };
+
+    function calculate() {
+      const A = parseFloat(amountEl.value) || 0;
+      const raw = termEl.value;
+
+      if (raw === "") {
+        netEl.textContent = "₱0.00";
+        return;
+      }
+
+      let term = parseInt(raw);
+      if (isNaN(term)) return;
+
+      if (term > 36) {
+        term = 36;
+        termEl.value = 36;
+      }
+
+      const row = loanTable.find(r => r.term === term);
+      if (!row) return;
+
+      const rate = row[paymentType] / 100;
+      const dsu = row.dsu / 100;
+      const sFee = row.sFee / 100;
+      const shareCapital = 500;
+
+      const net = A - (A * rate) - (A * dsu) - (A * sFee) - shareCapital;
+
+      netEl.textContent =
+        "₱" + net.toLocaleString("en-PH", { minimumFractionDigits: 2 });
+    }
+
+    amountEl.addEventListener("input", calculate);
+
+    termEl.addEventListener("input", (e) => {
+      const val = e.target.value;
+
+      if (val === "") {
+        calculate();
+        return;
+      }
+
+      const num = parseInt(val);
+
+      if (isNaN(num)) {
+        e.target.value = "";
+        return;
+      }
+
+      if (num > 36) {
+        e.target.value = "36";
+      }
+
+      calculate();
+    });
+
+    calculate();
+
+  </script>
+</BaseLayout>
