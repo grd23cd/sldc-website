@@ -1,0 +1,202 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+  <div class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+
+    <!-- HERO -->
+    <section class="text-center space-y-3">
+      <h1 class="text-5xl font-bold tracking-tight text-slate-900">
+        Loan Calculator
+      </h1>
+      <p class="text-slate-500">
+        Adjust sliders to explore repayment plans
+      </p>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="grid md:grid-cols-3 gap-8">
+
+      <!-- INPUT CARD -->
+      <div class="bg-white rounded-2xl shadow-md p-6 space-y-6">
+
+        <h2 class="text-xl font-semibold text-slate-800">Loan Parameters</h2>
+
+        <!-- PRINCIPAL -->
+        <div>
+          <label class="text-sm text-slate-600">
+            Principal: ₱<span id="principalValue">50000</span>
+          </label>
+          <input id="principal" type="range" min="1000" max="500000" step="1000" value="50000" class="w-full">
+        </div>
+
+        <!-- RATE -->
+        <div>
+          <label class="text-sm text-slate-600">
+            Annual Interest: <span id="rateValue">12</span>%
+          </label>
+          <input id="rate" type="range" min="1" max="30" step="0.5" value="12" class="w-full">
+        </div>
+
+        <!-- TERM -->
+        <div>
+          <label class="text-sm text-slate-600">
+            Term: <span id="termValue">24</span> months
+          </label>
+          <input id="term" type="range" min="6" max="120" step="6" value="24" class="w-full">
+        </div>
+
+      </div>
+
+      <!-- SUMMARY + BREAKDOWN -->
+      <div class="md:col-span-2 space-y-6">
+
+        <!-- SUMMARY CARD (gradient like your reference) -->
+        <div class="bg-gradient-to-r from-green-900 to-green-700 text-white rounded-2xl p-8 shadow-lg">
+          <div class="grid md:grid-cols-3 gap-6 text-center">
+
+            <div>
+              <p class="text-sm opacity-80">Monthly Payment</p>
+              <p class="text-2xl font-bold" id="monthly">₱0.00</p>
+            </div>
+
+            <div>
+              <p class="text-sm opacity-80">Total Payment</p>
+              <p class="text-2xl font-bold" id="totalPayment">₱0.00</p>
+            </div>
+
+            <div>
+              <p class="text-sm opacity-80">Total Interest</p>
+              <p class="text-2xl font-bold" id="totalInterest">₱0.00</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BREAKDOWN CARD -->
+        <div class="bg-white rounded-2xl shadow-md p-6">
+          <h3 class="text-lg font-semibold mb-4">Payment Breakdown</h3>
+
+          <div class="grid md:grid-cols-2 gap-4 text-slate-700">
+            <p>Interest (Month 1): <span id="firstInterest" class="font-semibold"></span></p>
+            <p>Principal (Month 1): <span id="firstPrincipal" class="font-semibold"></span></p>
+            <p>Rate: <span id="rateDisplay" class="font-semibold"></span></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TABLE -->
+    <section class="bg-white rounded-2xl shadow-md overflow-hidden">
+
+      <div class="bg-green-900 text-white text-center py-6">
+        <h2 class="text-2xl font-bold">Amortization Schedule</h2>
+      </div>
+
+      <div class="max-h-[500px] overflow-y-auto">
+        <table class="w-full text-sm text-left border-collapse">
+
+          <thead class="bg-slate-50 sticky top-0 z-10">
+            <tr class="text-slate-700">
+              <th class="p-3">#</th>
+              <th class="p-3">Payment</th>
+              <th class="p-3">Principal</th>
+              <th class="p-3">Interest</th>
+              <th class="p-3">Balance</th>
+            </tr>
+          </thead>
+
+          <tbody id="schedule" class="text-slate-600"></tbody>
+
+        </table>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- SCRIPT -->
+  <script is:inline>
+    const principalEl = document.getElementById("principal");
+    const rateEl = document.getElementById("rate");
+    const termEl = document.getElementById("term");
+
+    const principalValue = document.getElementById("principalValue");
+    const rateValue = document.getElementById("rateValue");
+    const termValue = document.getElementById("termValue");
+
+    const monthlyEl = document.getElementById("monthly");
+    const totalPaymentEl = document.getElementById("totalPayment");
+    const totalInterestEl = document.getElementById("totalInterest");
+
+    const firstInterestEl = document.getElementById("firstInterest");
+    const firstPrincipalEl = document.getElementById("firstPrincipal");
+    const rateDisplay = document.getElementById("rateDisplay");
+
+    const scheduleEl = document.getElementById("schedule");
+
+    function format(n) {
+      return "₱" + Number(n).toLocaleString("en-PH", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function calculate() {
+      const P = parseFloat(principalEl.value);
+      const annualRate = parseFloat(rateEl.value) / 100;
+      const months = parseInt(termEl.value);
+
+      const r = annualRate / 12;
+
+      const monthly =
+        (P * r * Math.pow(1 + r, months)) /
+        (Math.pow(1 + r, months) - 1);
+
+      let balance = P;
+      let totalInterest = 0;
+
+      scheduleEl.innerHTML = "";
+
+      for (let i = 1; i <= months; i++) {
+        const interest = balance * r;
+        const principal = monthly - interest;
+        balance -= principal;
+
+        totalInterest += interest;
+
+        if (i === 1) {
+          firstInterestEl.textContent = format(interest);
+          firstPrincipalEl.textContent = format(principal);
+        }
+
+        scheduleEl.insertAdjacentHTML("beforeend", `
+          <tr class="border-b hover:bg-slate-50">
+            <td class="p-2">${i}</td>
+            <td class="p-2">${format(monthly)}</td>
+            <td class="p-2">${format(principal)}</td>
+            <td class="p-2">${format(interest)}</td>
+            <td class="p-2">${format(Math.max(balance, 0))}</td>
+          </tr>
+        `);
+      }
+
+      principalValue.textContent = P;
+      rateValue.textContent = rateEl.value;
+      termValue.textContent = months;
+
+      monthlyEl.textContent = format(monthly);
+      totalPaymentEl.textContent = format(monthly * months);
+      totalInterestEl.textContent = format(totalInterest);
+      rateDisplay.textContent = rateEl.value + "%";
+    }
+
+    principalEl.addEventListener("input", calculate);
+    rateEl.addEventListener("input", calculate);
+    termEl.addEventListener("input", calculate);
+
+    calculate();
+  </script>
+</BaseLayout>
