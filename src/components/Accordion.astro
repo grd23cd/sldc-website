@@ -3,12 +3,19 @@ const { title } = Astro.props;
 ---
 
 <details class="group accordion" data-accordion>
-  <summary class="cursor-pointer list-none px-6 py-5 flex justify-between items-center">
-    <h2 class="text-xl font-semibold">{title}</h2>
+  <summary class="cursor-pointer list-none px-6 py-5 flex justify-between items-start gap-4">
+    
+    <!-- LEFT: Title + helper text -->
+    <div class="flex flex-col">
+      <h2 class="text-xl font-semibold">{title}</h2>
+      <p class="text-xs text-slate-400 mt-1">
+        Click to expand
+      </p>
+    </div>
 
-    <!-- Arrow -->
+    <!-- RIGHT: Arrow -->
     <svg
-      class="w-5 h-5 text-slate-500 transition-transform duration-300 group-open:rotate-180"
+      class="w-5 h-5 text-slate-500 transition-transform duration-300 group-open:rotate-180 mt-1"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -28,12 +35,10 @@ const { title } = Astro.props;
 </details>
 
 <style>
-  /* IMPORTANT: better than transition: all */
   details {
     overflow: hidden;
   }
 
-  /* Smooth open animation fix */
   details[open] .accordion-content {
     animation: fadeIn 0.25s ease;
   }
@@ -49,7 +54,6 @@ const { title } = Astro.props;
     }
   }
 
-  /* optional: remove default triangle spacing issues */
   summary::-webkit-details-marker {
     display: none;
   }
