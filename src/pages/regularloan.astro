@@ -24,12 +24,19 @@ const base = import.meta.env.BASE_URL;
 
         <h2 class="text-xl font-semibold text-slate-800">Loan Parameters</h2>
 
+        <!-- AMOUNT -->
         <div>
           <label class="text-sm text-slate-600">Amount (₱)</label>
           <input id="amount" type="number" class="w-full mt-1 p-2 border rounded-lg" value="50000">
         </div>
 
-        <!-- BUTTONS -->
+        <!-- AGE -->
+        <div>
+          <label class="text-sm text-slate-600">Age</label>
+          <input id="age" type="number" class="w-full mt-1 p-2 border rounded-lg" placeholder="Enter age">
+        </div>
+
+        <!-- PAYMENT TYPE -->
         <div>
           <label class="text-sm text-slate-600">Payment Type</label>
           <div class="flex gap-2 mt-2">
@@ -39,6 +46,7 @@ const base = import.meta.env.BASE_URL;
           </div>
         </div>
 
+        <!-- TERM -->
         <div>
           <label class="text-sm text-slate-600">Term (months)</label>
           <input id="term" type="number" max="36" placeholder="1 - 36"
@@ -49,13 +57,12 @@ const base = import.meta.env.BASE_URL;
 
       <!-- OUTPUT -->
       <div class="md:col-span-2 space-y-6">
-
         <div class="bg-gradient-to-r from-green-900 to-green-700 text-white rounded-2xl p-10 text-center shadow-lg">
           <p class="text-sm opacity-80">Net Proceeds</p>
           <p class="text-4xl font-bold mt-2" id="net">₱0.00</p>
         </div>
-
       </div>
+
     </section>
   </div>
 
@@ -105,6 +112,7 @@ const base = import.meta.env.BASE_URL;
 
     const amountEl = document.getElementById("amount");
     const termEl = document.getElementById("term");
+    const ageEl = document.getElementById("age");
     const netEl = document.getElementById("net");
 
     let paymentType = "monthly";
@@ -139,6 +147,15 @@ const base = import.meta.env.BASE_URL;
     function calculate() {
       const A = parseFloat(amountEl.value) || 0;
       const raw = termEl.value;
+      const ageRaw = ageEl.value;
+
+      //Do not calculate if age is empty
+      if (ageRaw === "") {
+        netEl.textContent = "₱0.00";
+        return;
+      }
+
+      const age = parseInt(ageRaw);
 
       if (raw === "") {
         netEl.textContent = "₱0.00";
@@ -157,7 +174,10 @@ const base = import.meta.env.BASE_URL;
       if (!row) return;
 
       const rate = row[paymentType] / 100;
-      const dsu = row.dsu / 100;
+
+      //DSU waived if senior
+      const dsu = age >= 60 ? 0 : row.dsu / 100;
+
       const sFee = row.sFee / 100;
       const shareCapital = 500;
 
@@ -168,6 +188,7 @@ const base = import.meta.env.BASE_URL;
     }
 
     amountEl.addEventListener("input", calculate);
+    ageEl.addEventListener("input", calculate);
 
     termEl.addEventListener("input", (e) => {
       const val = e.target.value;
