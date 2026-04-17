@@ -1,0 +1,158 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+  <div class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+
+    <!-- HERO -->
+    <section class="text-center space-y-3">
+      <h1 class="text-5xl font-bold tracking-tight text-slate-900">
+        Secured Loan Calculator
+      </h1>
+      <p class="text-xl pt-10">
+        Note: This calculator is for first timers or those with no existing loans. For more accurate details, please consult our credit department.
+      </p>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="grid md:grid-cols-3 gap-8">
+
+      <!-- INPUT -->
+      <div class="bg-white rounded-2xl shadow-md p-6 space-y-6">
+
+        <h2 class="text-xl font-semibold text-slate-800">Loan Parameters</h2>
+
+        <!-- AMOUNT -->
+        <div>
+          <label class="text-sm text-slate-600">Amount (₱)</label>
+          <input id="amount" type="number" class="w-full mt-1 p-2 border rounded-lg" value="50000">
+        </div>
+
+        <!-- AGE -->
+        <div>
+          <label class="text-sm text-slate-600">Age</label>
+          <input id="age" type="number" class="w-full mt-1 p-2 border rounded-lg" placeholder="Enter age">
+
+          <!-- VANISHING / ANIMATED HINT -->
+          <p
+            id="ageHint"
+            class="text-xs text-red-500 mt-1 ml-2 opacity-0 -translate-y-1 transition-all duration-300"
+          >
+            Enter age first
+          </p>
+        </div>
+
+        <!-- TERM BUTTONS -->
+        <div>
+          <label class="text-sm text-slate-600">Term</label>
+          <div class="flex gap-2 mt-2">
+            <button id="term6" class="termBtn bg-green-700 text-white px-3 py-1 rounded-lg">6 Months</button>
+            <button id="term12" class="termBtn bg-slate-200 px-3 py-1 rounded-lg">12 Months</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="md:col-span-2 space-y-6">
+        <div class="bg-gradient-to-r from-green-900 to-green-700 text-white rounded-2xl p-10 text-center shadow-lg">
+          <p class="text-sm opacity-80">Net Proceeds</p>
+          <p class="text-4xl font-bold mt-2" id="net">₱0.00</p>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <script is:inline>
+
+    const loanTable = [
+      { term: 6, interest: 4.50, sFee: 3.0, dsu: 0.6 },
+      { term: 12, interest: 9, sFee: 3.0, dsu: 1.2 },
+    ];
+
+    const amountEl = document.getElementById("amount");
+    const ageEl = document.getElementById("age");
+    const netEl = document.getElementById("net");
+    const ageHint = document.getElementById("ageHint");
+
+    let selectedTerm = 6;
+
+    function setActive(btn) {
+      document.querySelectorAll(".termBtn").forEach(b => {
+        b.classList.remove("bg-green-700","text-white");
+        b.classList.add("bg-slate-200");
+      });
+      btn.classList.add("bg-green-700","text-white");
+      btn.classList.remove("bg-slate-200");
+    }
+
+    document.getElementById("term6").onclick = (e) => {
+      selectedTerm = 6;
+      setActive(e.target);
+      calculate();
+    };
+
+    document.getElementById("term12").onclick = (e) => {
+      selectedTerm = 12;
+      setActive(e.target);
+      calculate();
+    };
+
+    // Smooth fade logic
+    function updateAgeHint(ageRaw) {
+      if (!ageRaw || ageRaw.trim() === "") {
+        ageHint.classList.remove("opacity-0", "-translate-y-1");
+        ageHint.classList.add("opacity-100", "translate-y-0");
+      } else {
+        ageHint.classList.add("opacity-0", "-translate-y-1");
+        ageHint.classList.remove("opacity-100", "translate-y-0");
+      }
+    }
+
+    function calculate() {
+      const A = parseFloat(amountEl.value) || 0;
+      const ageRaw = ageEl.value;
+
+      updateAgeHint(ageRaw);
+
+      // Do not calculate if age is empty
+      if (ageRaw === "") {
+        netEl.textContent = "₱0.00";
+        return;
+      }
+
+      const age = parseInt(ageRaw);
+
+      const row = loanTable.find(r => r.term === selectedTerm);
+      if (!row) return;
+
+      const interest = row.interest / 100;
+      const sFee = row.sFee / 100;
+
+      const dsu = age >= 60 ? 0 : row.dsu / 100;
+
+      const filingFee = 1000;
+      const fixed = 500;
+
+      const net =
+        A
+        - (A * interest)
+        - (A * sFee)
+        - (A * dsu)
+        - filingFee
+        - fixed;
+
+      netEl.textContent =
+        "₱" + net.toLocaleString("en-PH", { minimumFractionDigits: 2 });
+    }
+
+    amountEl.addEventListener("input", calculate);
+    ageEl.addEventListener("input", calculate);
+
+    calculate();
+
+  </script>
+</BaseLayout>
