@@ -1,6 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import StoreLocation from "../components/StoreLocation.astro";
+import Mart1Location from "../components/Mart1-Location.astro";
+import Mart2Location from "../components/Mart2-Location.astro";
+import Mart3Location from "../components/Mart3-Location.astro";
+import Mart4Location from "../components/Mart4-Location.astro";
+import RicemillLocation from "../components/Ricemill-Location.astro";
 ---
 
 <BaseLayout>
@@ -89,15 +93,47 @@ import StoreLocation from "../components/StoreLocation.astro";
     </section>
 
     <!-- MAP SECTION -->
-    <section class="bg-green-900 text-white rounded-2xl shadow-lg overflow-hidden">
-      <div class="p-6 text-center">
+    <section class="bg-green-900 text-white rounded-2xl shadow-lg overflow-hidden text-center">
+      <div class="p-6">
         <h2 class="text-3xl font-bold">Our Location</h2>
         <p class="text-white/80 mt-2">Find us on the map below</p>
       </div>
 
+      <h2 class="text-xl font-bold p-5">MART 2 - MAIN</h2>
       <div class="p-4 md:p-6">
-        <StoreLocation />
+        <Mart2Location />
       </div>
+
+      <h2 class="text-xl font-bold p-5">MART 1</h2>
+      <div class="p-4 md:p-6">
+        <Mart1Location />
+      </div>
+
+      <h2 class="text-xl font-bold p-5">MART 3</h2>
+      <div class="p-4 md:p-6">
+        <Mart3Location />
+      </div>
+
+      <h2 class="text-xl font-bold p-5">MART 4 - LUISIANA</h2>
+      <div class="p-4 md:p-6">
+        <Mart4Location />
+      </div>
+
+      <h2 class="text-xl font-bold p-5">Water Refilling Station</h2>
+      <div class="p-4 md:p-6">
+        <Mart1Location />
+      </div>
+
+      <h2 class="text-xl font-bold p-5">Appliances and Gift Shop</h2>
+      <div class="p-4 md:p-6">
+        <Mart1Location />
+      </div>
+
+      <h2 class="text-xl font-bold p-5">Ricemill</h2>
+      <div class="p-4 md:p-6">
+        <RicemillLocation />
+      </div>
+
     </section>
 
   </div>
