@@ -34,6 +34,13 @@ const base = import.meta.env.BASE_URL;
         <div>
           <label class="text-sm text-slate-600">Age</label>
           <input id="age" type="number" class="w-full mt-1 p-2 border rounded-lg" placeholder="Enter age">
+
+          <p
+            id="ageHint"
+            class="text-xs text-red-500 mt-1 ml-2 opacity-0 -translate-y-1 transition-all duration-300"
+          >
+            Enter age first
+          </p>
         </div>
 
         <!-- PAYMENT TYPE -->
@@ -49,8 +56,16 @@ const base = import.meta.env.BASE_URL;
         <!-- TERM -->
         <div>
           <label class="text-sm text-slate-600">Term (months)</label>
-          <input id="term" type="number" max="36" placeholder="1 - 36"
+          <input id="term" type="number" max="36" placeholder="Enter term (1 - 36)"
             class="w-full mt-1 p-2 border rounded-lg">
+
+          <!-- NEW TERM HINT -->
+          <p
+            id="termHint"
+            class="text-xs text-red-500 mt-1 ml-2 opacity-0 -translate-y-1 transition-all duration-300"
+          >
+            Enter term in months 
+          </p>
         </div>
 
       </div>
@@ -115,6 +130,9 @@ const base = import.meta.env.BASE_URL;
     const ageEl = document.getElementById("age");
     const netEl = document.getElementById("net");
 
+    const ageHint = document.getElementById("ageHint");
+    const termHint = document.getElementById("termHint");
+
     let paymentType = "monthly";
 
     function setActive(btn) {
@@ -144,25 +162,44 @@ const base = import.meta.env.BASE_URL;
       calculate();
     };
 
+    // AGE hint animation
+    function updateAgeHint(ageRaw) {
+      if (!ageRaw || ageRaw.trim() === "") {
+        ageHint.classList.remove("opacity-0", "-translate-y-1");
+        ageHint.classList.add("opacity-100", "translate-y-0");
+      } else {
+        ageHint.classList.add("opacity-0", "-translate-y-1");
+        ageHint.classList.remove("opacity-100", "translate-y-0");
+      }
+    }
+
+    // TERM hint animation
+    function updateTermHint(termRaw) {
+      if (!termRaw || termRaw.trim() === "") {
+        termHint.classList.remove("opacity-0", "-translate-y-1");
+        termHint.classList.add("opacity-100", "translate-y-0");
+      } else {
+        termHint.classList.add("opacity-0", "-translate-y-1");
+        termHint.classList.remove("opacity-100", "translate-y-0");
+      }
+    }
+
     function calculate() {
       const A = parseFloat(amountEl.value) || 0;
       const raw = termEl.value;
       const ageRaw = ageEl.value;
 
-      //Do not calculate if age is empty
-      if (ageRaw === "") {
+      updateAgeHint(ageRaw);
+      updateTermHint(raw);
+
+      if (ageRaw === "" || raw === "") {
         netEl.textContent = "₱0.00";
         return;
       }
 
       const age = parseInt(ageRaw);
-
-      if (raw === "") {
-        netEl.textContent = "₱0.00";
-        return;
-      }
-
       let term = parseInt(raw);
+
       if (isNaN(term)) return;
 
       if (term > 36) {
@@ -174,14 +211,16 @@ const base = import.meta.env.BASE_URL;
       if (!row) return;
 
       const rate = row[paymentType] / 100;
-
-      //DSU waived if senior
       const dsu = age >= 60 ? 0 : row.dsu / 100;
-
       const sFee = row.sFee / 100;
       const shareCapital = 500;
 
-      const net = A - (A * rate) - (A * dsu) - (A * sFee) - shareCapital;
+      const net =
+        A
+        - (A * rate)
+        - (A * dsu)
+        - (A * sFee)
+        - shareCapital;
 
       netEl.textContent =
         "₱" + net.toLocaleString("en-PH", { minimumFractionDigits: 2 });
@@ -189,28 +228,7 @@ const base = import.meta.env.BASE_URL;
 
     amountEl.addEventListener("input", calculate);
     ageEl.addEventListener("input", calculate);
-
-    termEl.addEventListener("input", (e) => {
-      const val = e.target.value;
-
-      if (val === "") {
-        calculate();
-        return;
-      }
-
-      const num = parseInt(val);
-
-      if (isNaN(num)) {
-        e.target.value = "";
-        return;
-      }
-
-      if (num > 36) {
-        e.target.value = "36";
-      }
-
-      calculate();
-    });
+    termEl.addEventListener("input", calculate);
 
     calculate();
 
