@@ -93,15 +93,28 @@
     }, 300);
   }
 
+  function normalize(text) {
+    return text
+      .toLowerCase()
+      .replace(/[^\w\s]/g, '') // remove punctuation
+      .replace(/\s+/g, ' ')    // normalize spaces
+      .trim();
+  }
+
   function getAnswer(msg) {
-    msg = msg.toLowerCase().trim();
+    const userMsg = normalize(msg);
 
     for (const key in QA) {
-      if (msg.includes(key)) return QA[key];
+      const qKey = normalize(key);
+
+      if (userMsg.includes(qKey)) {
+        return QA[key];
+      }
     }
 
     return "Sorry, I don't understand that.";
   }
+
 
   function sendMessage(msg) {
     if (!msg) return;
