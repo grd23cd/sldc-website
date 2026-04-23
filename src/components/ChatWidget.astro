@@ -1,7 +1,3 @@
----
-
----
-
 <!-- FLOATING BUTTON -->
 <div class="fixed bottom-6 right-6 flex flex-col items-end z-50">
   <button id="chatToggle"
@@ -19,24 +15,14 @@
          rounded-t-xl sm:rounded-xl overflow-hidden">
 
   <!-- HEADER -->
-  <div class="bg-green-700 text-white px-4 py-3 
-              flex justify-between items-center">
+  <div class="bg-green-700 text-white px-4 py-3 flex justify-between items-center">
     <span class="font-semibold">Chat Support</span>
     <button id="closeChat">✕</button>
   </div>
 
-  <!-- QUICK QUESTIONS -->
-  <div class="p-2 border-b flex flex-wrap gap-2 text-xs">
-    <button class="quick-btn bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded-md">
-      What are your hours
-    </button>
-    <button class="quick-btn bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded-md">
-      Where are you located
-    </button>
-    <button class="quick-btn bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded-md">
-      How to join
-    </button>
-  </div>
+  <!-- QUICK QUESTIONS (DYNAMIC) -->
+  <div id="quickQuestions"
+    class="p-2 border-b flex flex-wrap gap-2 text-xs"></div>
 
   <!-- CHAT AREA -->
   <div id="chatBox"
@@ -45,7 +31,6 @@
 </div>
 
 <style>
-  /* 🌟 Smooth fade + slide animation */
   .msg {
     opacity: 0;
     transform: translateY(8px);
@@ -62,15 +47,20 @@
 
 <script is:inline>
   const QA = {
-    "what are your hours": "We are open 8AM–5PM Monday to Friday.",
-    "where are you located": "We are located in General Lucban corner Emilio Jacinto St. Lucban, Quezon.",
-    "how to join": "Visit our membership page and fill out the form.",
+    "What are your hours": "We are open 8AM–5PM Monday to Friday.",
+    "Where are you located": "We are located in General Lucban corner Emilio Jacinto St. Lucban, Quezon.",
+    "How to join": "Visit our membership page and fill out the form.",
+    "Kailan ang interview": "Lorem ipsum dolor sit amet",
+    "Kailan ang approval": "Lorem ipsum dolor sit amet",
+    "Sino o ilan ang co maker": "Lorem ipsum dolor sit amet",
+    "Fines": "Lorem ipsum dolor sit amet",
   };
 
   const chatBox = document.getElementById("chatBox");
   const chatWidget = document.getElementById("chatWidget");
   const chatToggle = document.getElementById("chatToggle");
   const closeChat = document.getElementById("closeChat");
+  const quickContainer = document.getElementById("quickQuestions");
 
   let welcomeShown = false;
 
@@ -120,6 +110,26 @@
     addMessage(getAnswer(msg), "bot");
   }
 
+  // Generate buttons dynamically from QA
+  function loadQuickQuestions() {
+    quickContainer.innerHTML = "";
+
+    Object.keys(QA).forEach(key => {
+      const btn = document.createElement("button");
+
+      btn.className =
+        "quick-btn bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded-md";
+
+      btn.textContent = key;
+
+      btn.addEventListener("click", () => {
+        sendMessage(key);
+      });
+
+      quickContainer.appendChild(btn);
+    });
+  }
+
   // OPEN CHAT
   chatToggle.addEventListener("click", () => {
     const isHidden = chatWidget.classList.contains("hidden");
@@ -129,6 +139,7 @@
     if (isHidden) {
       clearChat();
       showWelcome();
+      loadQuickQuestions(); // load all questions
     }
   });
 
@@ -136,12 +147,5 @@
   closeChat.addEventListener("click", () => {
     chatWidget.classList.add("hidden");
     clearChat();
-  });
-
-  // QUICK BUTTONS
-  document.querySelectorAll(".quick-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      sendMessage(btn.textContent);
-    });
   });
 </script>
