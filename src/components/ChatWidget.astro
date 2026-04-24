@@ -1,33 +1,44 @@
+---
+const base = import.meta.env.BASE_URL;
+const membershipLink = `${base}membership`;
+---
+
 <!-- FLOATING BUTTON -->
 <div class="fixed bottom-6 right-6 flex flex-col items-end z-50">
-  <button id="chatToggle"
-    class="bg-green-700 hover:bg-green-800 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg">
+  <button
+    id="chatToggle"
+    class="bg-green-700 hover:bg-green-800 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg"
+  >
     💬
   </button>
 </div>
 
 <!-- CHAT WINDOW -->
-<div id="chatWidget"
+<div
+  id="chatWidget"
   class="hidden fixed bottom-0 right-0 sm:bottom-24 sm:right-6 
          w-full sm:w-80 h-[85vh] sm:h-[420px]
          bg-white shadow-2xl border 
          flex flex-col z-50
-         rounded-t-xl sm:rounded-xl overflow-hidden">
-
+         rounded-t-xl sm:rounded-xl overflow-hidden"
+>
   <!-- HEADER -->
   <div class="bg-green-700 text-white px-4 py-3 flex justify-between items-center">
     <span class="font-semibold">Chat Support</span>
     <button id="closeChat">✕</button>
   </div>
 
-  <!-- QUICK QUESTIONS (DYNAMIC) -->
-  <div id="quickQuestions"
-    class="p-2 border-b flex flex-wrap gap-2 text-xs"></div>
+  <!-- QUICK QUESTIONS -->
+  <div
+    id="quickQuestions"
+    class="p-2 border-b flex flex-wrap gap-2 text-xs"
+  ></div>
 
   <!-- CHAT AREA -->
-  <div id="chatBox"
-    class="flex-1 overflow-y-auto space-y-2 text-sm p-2"></div>
-
+  <div
+    id="chatBox"
+    class="flex-1 overflow-y-auto space-y-2 text-sm p-2"
+  ></div>
 </div>
 
 <style>
@@ -45,15 +56,19 @@
   }
 </style>
 
-<script is:inline>
+<script define:vars={{ membershipLink }}>
   const QA = {
     "What are your hours": "We are open 8AM–5PM Monday to Friday.",
-    "Where are you located": "We are located in General Lucban corner Emilio Jacinto St. Lucban, Quezon.",
-    "How to join": "Visit our membership page and fill out the form.",
+
+    "Where are you located":
+      "We are located in General Lucban corner Emilio Jacinto St. Lucban, Quezon.",
+
+    "How to join":
+      `Visit our membership page. <a href="${membershipLink}" class="text-blue-600 underline font-medium">Click here</a>.`,
+
     "Kailan ang interview": "Lorem ipsum dolor sit amet",
     "Kailan ang approval": "Lorem ipsum dolor sit amet",
     "Sino o ilan ang co maker": "Lorem ipsum dolor sit amet",
-    "Fines": "Lorem ipsum dolor sit amet",
   };
 
   const chatBox = document.getElementById("chatBox");
@@ -73,11 +88,16 @@
     const div = document.createElement("div");
 
     div.className =
-      (type === "user"
+      type === "user"
         ? "text-right text-green-700 msg"
-        : "text-left text-gray-700 msg");
+        : "text-left text-gray-700 msg";
 
-    div.textContent = text;
+    // Allow HTML only for bot messages
+    if (type === "bot") {
+      div.innerHTML = text;
+    } else {
+      div.textContent = text;
+    }
 
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -96,8 +116,8 @@
   function normalize(text) {
     return text
       .toLowerCase()
-      .replace(/[^\w\s]/g, '') // remove punctuation
-      .replace(/\s+/g, ' ')    // normalize spaces
+      .replace(/[^\w\s]/g, "")
+      .replace(/\s+/g, " ")
       .trim();
   }
 
@@ -115,7 +135,6 @@
     return "Sorry, I don't understand that.";
   }
 
-
   function sendMessage(msg) {
     if (!msg) return;
 
@@ -123,11 +142,10 @@
     addMessage(getAnswer(msg), "bot");
   }
 
-  // Generate buttons dynamically from QA
   function loadQuickQuestions() {
     quickContainer.innerHTML = "";
 
-    Object.keys(QA).forEach(key => {
+    Object.keys(QA).forEach((key) => {
       const btn = document.createElement("button");
 
       btn.className =
@@ -152,7 +170,7 @@
     if (isHidden) {
       clearChat();
       showWelcome();
-      loadQuickQuestions(); // load all questions
+      loadQuickQuestions();
     }
   });
 
