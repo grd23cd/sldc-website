@@ -10,27 +10,27 @@ import img5 from '../assets/carousel/treeplanting-5.jpg';
 const images: ImageMetadata[] = [img1, img2, img3, img4, img5];
 ---
 
-<div class="tree-slider w-full h-full">
+<div class="tree-slider w-full max-w-3xl aspect-square mx-auto">
 
   <div class="relative w-full h-full overflow-hidden rounded-xl">
 
     <!-- TRACK -->
-    <div class="track flex w-full h-full transition-transform duration-700 ease-in-out">
+    <div class="track flex h-full transition-transform duration-700 ease-in-out">
       {/* @ts-ignore */}
       {images.map((img) => (
         <img
           src={img.src}
-          class="w-full h-full flex-shrink-0 object-cover"
+          class="min-w-full h-full object-cover block"
         />
       ))}
     </div>
 
     <!-- BUTTONS -->
-    <button class="prev absolute left-2 top-1/2 -translate-y-1/2 btn btn-circle">
+    <button class="prev absolute left-2 top-1/2 -translate-y-1/2 btn btn-circle z-10">
       ❮
     </button>
 
-    <button class="next absolute right-2 top-1/2 -translate-y-1/2 btn btn-circle">
+    <button class="next absolute right-2 top-1/2 -translate-y-1/2 btn btn-circle z-10">
       ❯
     </button>
 
