@@ -12,6 +12,8 @@ import ProcessionFeastOfSanRafaelArkanghel2025 from "../components/ProcessionFea
 import QuezonFederationAndUnionOfCooperatives2025 from "../components/QuezonFederationAndUnionOfCooperatives2025.astro";
 import RealOutreach2025 from "../components/RealOutreach2025.astro";
 import SldcThanksgivingParty2025 from "../components/SldcThanksgivingParty2025.astro";
+import CoopMonth2025TreePlanting from "../components/CoopMonth2025TreePlanting.astro";
+import IndependenceDay2025 from "../components/IndependenceDay2025.astro";
 
 type GallerySection = {
   title: string;
@@ -128,6 +130,14 @@ const gallerySections = rawGallerySections as GallerySection[];
 
         <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
           <SldcThanksgivingParty2025 />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <CoopMonth2025TreePlanting />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <IndependenceDay2025 />
         </div>
       </div>
     </section>
