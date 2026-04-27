@@ -10,8 +10,7 @@ import img5 from '../assets/carousel/treeplanting-5.jpg';
 const images: ImageMetadata[] = [img1, img2, img3, img4, img5];
 ---
 
-<div class="tree-slider w-full max-w-3xl aspect-square mx-auto">
-
+<div class="slider w-full max-w-3xl aspect-square mx-auto" data-slider>
   <div class="relative w-full h-full overflow-hidden rounded-xl">
 
     <!-- TRACK -->
@@ -38,30 +37,55 @@ const images: ImageMetadata[] = [img1, img2, img3, img4, img5];
 </div>
 
 <script is:inline>
-  const slider = document.querySelector(".tree-slider");
-  const track = slider.querySelector(".track");
-  const next = slider.querySelector(".next");
-  const prev = slider.querySelector(".prev");
+  document.querySelectorAll("[data-slider]").forEach((slider) => {
+    if (slider.dataset.sliderInit === "true") return;
+    slider.dataset.sliderInit = "true";
 
-  const totalSlides = 5;
-  let index = 0;
+    const track = slider.querySelector(".track");
+    const next = slider.querySelector(".next");
+    const prev = slider.querySelector(".prev");
 
-  function updateSlide() {
-    track.style.transform = `translateX(-${index * 100}%)`;
-  }
+    if (!track || !next || !prev) return;
 
-  let interval = setInterval(() => {
-    index = (index + 1) % totalSlides;
-    updateSlide();
-  }, 3000);
+    const slides = track.children.length;
+    let index = 0;
+    let interval;
+    let startTimeout;
 
-  next.addEventListener("click", () => {
-    index = (index + 1) % totalSlides;
-    updateSlide();
-  });
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
 
-  prev.addEventListener("click", () => {
-    index = (index - 1 + totalSlides) % totalSlides;
-    updateSlide();
+    function start() {
+      clearTimeout(startTimeout);
+      startTimeout = setTimeout(() => {
+        clearInterval(interval);
+        interval = setInterval(() => {
+          index = (index + 1) % slides;
+          update();
+        }, 3000);
+      }, 200);
+    }
+
+    function stop() {
+      clearTimeout(startTimeout);
+      clearInterval(interval);
+    }
+
+    next.addEventListener("click", () => {
+      index = (index + 1) % slides;
+      update();
+    });
+
+    prev.addEventListener("click", () => {
+      index = (index - 1 + slides) % slides;
+      update();
+    });
+
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+
+    update();
+    start();
   });
 </script>
