@@ -15,6 +15,9 @@ import SldcThanksgivingParty2025 from "../components/SldcThanksgivingParty2025.a
 import CoopMonth2025TreePlanting from "../components/CoopMonth2025TreePlanting.astro";
 import IndependenceDay2025 from "../components/IndependenceDay2025.astro";
 import MassFeastOfSanRafaelArkanghel2025 from "../components/MassFeastOfSanRafaelArkanghel2025.astro";
+import PahiyasGrandParade2025 from "../components/PahiyasGrandParade2025.astro";
+import FourKGeneralAssembly2025 from "../components/4KGeneralAssembly2025.astro";
+import FiftyEighthFoundingAnniversaryMass2025 from "../components/58thFoundingAnniversaryMass2025.astro";
 
 type GallerySection = {
   title: string;
@@ -143,6 +146,18 @@ const gallerySections = rawGallerySections as GallerySection[];
 
         <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
           <MassFeastOfSanRafaelArkanghel2025 />
+        </div>
+        
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <PahiyasGrandParade2025 />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <FourKGeneralAssembly2025 />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <FiftyEighthFoundingAnniversaryMass2025 />
         </div>
       </div>
     </section>
