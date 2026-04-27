@@ -9,25 +9,26 @@ import img5 from '../assets/carousel/trickortreat2025-5.jpg';
 const images: ImageMetadata[] = [img1, img2, img3, img4, img5];
 ---
 
-<div class="flex justify-center mt-10">
-  <div class="relative w-[800px] h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden rounded-xl shadow-lg">
+<div class="slider w-full max-w-3xl aspect-square mx-auto" data-slider>
+  <div class="relative w-full h-full overflow-hidden rounded-xl">
 
-    <!-- SLIDER TRACK -->
-    <div id="track" class="flex w-full h-full transition-transform duration-700 ease-in-out">
-    {/* @ts-ignore */}
+    <!-- TRACK -->
+    <div class="track flex h-full transition-transform duration-700 ease-in-out">
+      {/* @ts-ignore */}
       {images.map((img) => (
-        <img src={img.src} class="w-full h-full flex-shrink-0 object-cover" />
+        <img
+          src={img.src}
+          class="min-w-full h-full object-cover block"
+        />
       ))}
     </div>
 
-    <!-- NAV BUTTONS -->
-    <button id="prev"
-      class="absolute left-4 top-1/2 -translate-y-1/2 btn btn-circle">
+    <!-- BUTTONS -->
+    <button class="prev absolute left-2 top-1/2 -translate-y-1/2 btn btn-circle z-10">
       ❮
     </button>
 
-    <button id="next"
-      class="absolute right-4 top-1/2 -translate-y-1/2 btn btn-circle">
+    <button class="next absolute right-2 top-1/2 -translate-y-1/2 btn btn-circle z-10">
       ❯
     </button>
 
@@ -35,40 +36,55 @@ const images: ImageMetadata[] = [img1, img2, img3, img4, img5];
 </div>
 
 <script is:inline>
-  const track = document.getElementById("track");
-  const totalSlides = 5;
-  let index = 0;
+  document.querySelectorAll("[data-slider]").forEach((slider) => {
+    if (slider.dataset.sliderInit === "true") return;
+    slider.dataset.sliderInit = "true";
 
-  function updateSlide() {
-    track.style.transform = `translateX(-${index * 100}%)`;
-  }
+    const track = slider.querySelector(".track");
+    const next = slider.querySelector(".next");
+    const prev = slider.querySelector(".prev");
 
-  // Auto slide
-  let interval = setInterval(() => {
-    index = (index + 1) % totalSlides;
-    updateSlide();
-  }, 3000);
+    if (!track || !next || !prev) return;
 
-  // Next / Prev buttons
-  document.getElementById("next").addEventListener("click", () => {
-    index = (index + 1) % totalSlides;
-    updateSlide();
+    const slides = track.children.length;
+    let index = 0;
+    let interval;
+    let startTimeout;
 
-    resetAuto();
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function start() {
+      clearTimeout(startTimeout);
+      startTimeout = setTimeout(() => {
+        clearInterval(interval);
+        interval = setInterval(() => {
+          index = (index + 1) % slides;
+          update();
+        }, 3000);
+      }, 200);
+    }
+
+    function stop() {
+      clearTimeout(startTimeout);
+      clearInterval(interval);
+    }
+
+    next.addEventListener("click", () => {
+      index = (index + 1) % slides;
+      update();
+    });
+
+    prev.addEventListener("click", () => {
+      index = (index - 1 + slides) % slides;
+      update();
+    });
+
+    slider.addEventListener("mouseenter", stop);
+    slider.addEventListener("mouseleave", start);
+
+    update();
+    start();
   });
-
-  document.getElementById("prev").addEventListener("click", () => {
-    index = (index - 1 + totalSlides) % totalSlides;
-    updateSlide();
-
-    resetAuto();
-  });
-
-  function resetAuto() {
-    clearInterval(interval);
-    interval = setInterval(() => {
-      index = (index + 1) % totalSlides;
-      updateSlide();
-    }, 3000);
-  }
 </script>

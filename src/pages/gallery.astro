@@ -5,6 +5,7 @@ import type { ImageMetadata } from "astro";
 import { gallerySections as rawGallerySections } from "../data/galleryImages";
 import TreePlanting from "../components/TreePlanting.astro";
 import TeamBuilding2025 from "../components/TeamBuilding2025.astro";
+import TrickOrTreat2025 from "../components/TrickOrTreat2025.astro";
 
 
 type GallerySection = {
@@ -94,6 +95,10 @@ const gallerySections = rawGallerySections as GallerySection[];
 
         <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
           <TeamBuilding2025 />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <TrickOrTreat2025 />
         </div>
       </div>
     </section>
