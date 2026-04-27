@@ -6,7 +6,9 @@ import { gallerySections as rawGallerySections } from "../data/galleryImages";
 import TreePlanting from "../components/TreePlanting.astro";
 import TeamBuilding2025 from "../components/TeamBuilding2025.astro";
 import TrickOrTreat2025 from "../components/TrickOrTreat2025.astro";
-
+import VisitaIglesia2025 from "../components/VisitaIglesia2025.astro";
+import PhillipineChamberofCooperativesGeneralAssembly2025 from "../components/PhilippineChamberofCooperativesGeneralAssembly2025.astro";
+import ProcessionFeastOfSanRafaelArkanghel2025 from "../components/ProcessionFeastOfSanRafaelArkanghel2025.astro";
 
 type GallerySection = {
   title: string;
@@ -99,6 +101,18 @@ const gallerySections = rawGallerySections as GallerySection[];
 
         <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
           <TrickOrTreat2025 />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <VisitaIglesia2025 />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <PhillipineChamberofCooperativesGeneralAssembly2025 />
+        </div>
+
+        <div class="rounded-2xl overflow-hidden shadow-md bg-white aspect-square">
+          <ProcessionFeastOfSanRafaelArkanghel2025 />
         </div>
       </div>
     </section>
