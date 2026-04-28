@@ -140,6 +140,50 @@ const base = import.meta.env.BASE_URL;
     <!-- CHAT WIDGET -->
     <ChatWidget />
 
+<script is:inline>
+  function initSliders() {
+    const sliders = document.querySelectorAll("[data-slider]");
+
+    sliders.forEach((slider) => {
+      // prevent double initialization
+      if (slider.dataset.initialized === "true") return;
+      slider.dataset.initialized = "true";
+
+      const track = slider.querySelector(".track");
+      const slides = slider.querySelectorAll("img");
+      const prevBtn = slider.querySelector(".prev");
+      const nextBtn = slider.querySelector(".next");
+
+      if (!track || !slides.length) return;
+
+      let index = 0;
+      const total = slides.length;
+
+      function updateSlider() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      function nextSlide() {
+        index = (index + 1) % total;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        index = (index - 1 + total) % total;
+        updateSlider();
+      }
+
+      nextBtn?.addEventListener("click", nextSlide);
+      prevBtn?.addEventListener("click", prevSlide);
+
+      setInterval(nextSlide, 4000);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initSliders);
+  document.addEventListener("astro:page-load", initSliders);
+</script>
+
   </body>
 </html>
   
