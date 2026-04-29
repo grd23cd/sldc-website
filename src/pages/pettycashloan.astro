@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout>
+  <div class="max-w-6xl mx-auto px-6 py-16 space-y-16 text-center">
+    <!-- HERO -->
+    <section class="text-center space-y-3">
+      <h1 class="text-5xl font-bold tracking-tight text-slate-900">
+        Petty Cash Loan Calculator
+      </h1>
+      <div class="text-left">
+        <p class="text-xl pt-10">
+            Ang mga bago at datihang kasapi na wala pang P4,000 ang palagiang lagak ay hindi maaring magavail nito.
+        </p>
+        <p class="text-xl pt-">
+            Ang halaga ng mahihiram ng isang kasapi ay ikatlong bahagi ng kanyang palagiang lagak na hindi hihigit sa P5,000 piso ang pwedeng mautang.
+        </p>
+      </div>
+    </section>
+    <!-- MAIN GRID -->
+    <section class="grid md:grid-cols-3 gap-8">
+      <!-- INPUT -->
+      <div class="bg-white rounded-2xl shadow-md p-6 space-y-6">
+        <h2 class="text-xl font-semibold text-slate-800">Loan Parameters</h2>
+        <!-- AMOUNT -->
+        <div>
+          <label class="text-sm text-slate-600">Fixed Deposit (₱)</label>
+          <input
+            id="amount"
+            type="number"
+            class="w-full mt-1 p-2 border rounded-lg"
+            value="4000"
+            min="4000"
+          >
+          <!-- Warning message -->
+          <p
+            id="warning"
+            class="text-sm mt-2 transition-opacity duration-300 opacity-0"
+          >
+            ⚠️ Ang minimum na palagiang lagak ay ₱4,000.
+          </p>
+        </div>
+      </div>
+      <!-- OUTPUT -->
+      <div class="md:col-span-2 space-y-6">
+        <div class="bg-gradient-to-r from-green-900 to-green-700 text-white rounded-2xl p-10 text-center shadow-lg">
+          <p class="text-sm opacity-80">Net Proceeds</p>
+          <p class="text-4xl font-bold mt-2" id="net">₱0.00</p>
+        </div>
+      </div>
+    </section>
+
+    <a href={`${base}loancalculator`} 
+        class="m-10 inline-block bg-gradient-to-r from-green-900 to-green-700 hover:from-green-800 hover:to-green-600 text-white font-semibold px-8 py-3 rounded-xl shadow-md transition duration-300">
+        Back To Loan Menu
+    </a>
+  </div>
+
+  <script is:inline>
+    const amountEl = document.getElementById("amount");
+    const netEl = document.getElementById("net");
+    const warningEl = document.getElementById("warning");
+
+    let warningTimeout = null;
+
+    function showWarning() {
+      // Clear any existing timeout so the warning doesn't disappear mid-typing
+      clearTimeout(warningTimeout);
+      warningEl.classList.remove("opacity-0");
+      warningEl.classList.add("opacity-100");
+    }
+
+    function hideWarning() {
+      warningEl.classList.remove("opacity-100");
+      warningEl.classList.add("opacity-0");
+    }
+
+    function calculate() {
+      let fixedDeposit = parseFloat(amountEl.value) || 0;
+      const serviceFee = 0.03;
+
+      if (fixedDeposit < 4000) {
+        // Show zero and warning
+        netEl.textContent = "₱0.00";
+        showWarning();
+        return;
+      }
+
+      hideWarning();
+
+      // Loanable amount = 1/3 of fixed deposit
+      let loanAmount = fixedDeposit / 3;
+
+      // Maximum loanable amount = ₱5,000
+      if (loanAmount > 5000) {
+        loanAmount = 5000;
+      }
+
+      // Net proceeds = loan amount - 3% service fee
+      const net = loanAmount - (loanAmount * serviceFee);
+
+      netEl.textContent =
+        "₱" + net.toLocaleString("en-PH", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+    }
+
+    amountEl.addEventListener("input", calculate);
+
+    // Snap back to 4000 only when the user leaves the field
+    amountEl.addEventListener("blur", () => {
+      const val = parseFloat(amountEl.value) || 0;
+      if (val < 4000) {
+        amountEl.value = 4000;
+        hideWarning();
+        calculate();
+      }
+    });
+
+    calculate();
+  </script>
+</BaseLayout>
