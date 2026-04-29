@@ -4,7 +4,7 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout>
-  <div class="max-w-6xl mx-auto px-6 py-16 space-y-16 text-center">
+  <div class="max-w-6xl mx-auto px-6 py-16 space-y-16">
 
     <!-- HERO -->
     <section class="text-center space-y-3">
@@ -64,7 +64,8 @@ const base = import.meta.env.BASE_URL;
       </div>
     </section>
 
-    <a href={`${base}loancalculator`} 
+    <div class="text-center">
+        <a href={`${base}loancalculator`} 
         class="m-10 inline-block bg-gradient-to-r from-green-900 to-green-700 hover:from-green-800 hover:to-green-600 text-white font-semibold px-8 py-3 rounded-xl shadow-md transition duration-300">
         Back To Loan Menu
     </a>
